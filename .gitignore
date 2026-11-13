@@ -1,0 +1,11 @@
+# Médias lourds : jamais dans git
+*.mp4
+*.MP4
+*.mov
+*.MOV
+*.mxf
+*.MXF
+*.wav
+*.m4a
+exports/**/*.mp4
+projets/**/proxies/
