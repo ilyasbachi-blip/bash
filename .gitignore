@@ -1,0 +1,4 @@
+radar-recettes/analyse/data/
+radar-recettes/analyse/out/
+__pycache__/
+.DS_Store

@@ -1,0 +1,258 @@
+<title>Radar recettes</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout: une barre collante (semaine en cours + onglets), puis une seule colonne de fiches ; la semaine vient de la base, les catalogues (saison, classiques, astuces) sont dans la page. */
+:root{
+  --bg:#F2F4EF; --card:#FFFFFF; --fg:#131B16; --muted:#5B655D; --line:#D9DED4;
+  --accent:#0F5B3A; --accent-soft:#DFEBE3; --sun:#E0A322; --sun-soft:#FBF0CF;
+  --hot:#B5412A; --hot-soft:#F7DED6; --ok:#2E7D4F; --ok-soft:#DCEFE1; --off:#8B918C;
+  --display:'Sora',system-ui,sans-serif; --body:'IBM Plex Sans',system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#111613; --card:#1A211C; --fg:#E9ECE6; --muted:#A2AAA3; --line:#2B332D;
+  --accent:#74C79A; --accent-soft:#1C3328; --sun:#E6B64A; --sun-soft:#3A3119;
+  --hot:#E58A72; --hot-soft:#3D241D; --ok:#7CCB9A; --ok-soft:#1E3A2B; --off:#7D847E; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#111613; --card:#1A211C; --fg:#E9ECE6; --muted:#A2AAA3; --line:#2B332D;
+  --accent:#74C79A; --accent-soft:#1C3328; --sun:#E6B64A; --sun-soft:#3A3119;
+  --hot:#E58A72; --hot-soft:#3D241D; --ok:#7CCB9A; --ok-soft:#1E3A2B; --off:#7D847E; color-scheme:dark }
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:15px;line-height:1.45;margin:0}
+.wrap{max-width:1120px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 72px}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0}
+h1{font-size:clamp(26px,4vw,38px);font-weight:800;letter-spacing:-.01em;line-height:1.05}
+h2{font-size:19px;font-weight:700}
+h3{font-size:15.5px;font-weight:700;line-height:1.25}
+.eyebrow{font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+button,select,input{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+a{color:var(--accent)}
+
+header.top{padding-block:26px 12px;display:flex;flex-wrap:wrap;gap:12px 28px;align-items:flex-end;justify-content:space-between}
+.week{font-size:13px;color:var(--muted);margin-top:6px}
+.week b{color:var(--fg);font-weight:600}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.toolbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);padding-block:10px 12px;border-bottom:1px solid var(--line);display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.tabs{display:flex;gap:6px;flex-wrap:wrap}
+.tab{border:1px solid var(--line);background:var(--card);border-radius:999px;padding:7px 13px;font-size:13px;font-weight:500}
+.tab[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+:root[data-theme="dark"] .tab[aria-pressed="true"]{color:#0E1A14}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .tab[aria-pressed="true"]{color:#0E1A14} }
+.toolbar select{margin-left:auto;padding:7px 10px;border:1px solid var(--line);border-radius:10px;background:var(--card);font-size:13px}
+
+.intro{padding-block:16px 4px;max-width:72ch;color:var(--muted);font-size:14px}
+.section{padding-block:20px 4px}
+.sec-head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:10px}
+.sec-head .sub{color:var(--muted);font-size:13px;max-width:72ch}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:10px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 12px 10px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.card.s-fait{border-color:var(--ok)} .card.s-non{opacity:.55}
+.row{display:flex;gap:8px;align-items:flex-start;justify-content:space-between}
+.rank{font-family:var(--display);font-weight:800;font-size:13px;color:var(--accent);background:var(--accent-soft);border-radius:8px;padding:2px 7px;white-space:nowrap}
+.src{font-size:12.5px;color:var(--muted);line-height:1.4}
+.src b{color:var(--fg);font-weight:600;font-variant-numeric:tabular-nums}
+.meca{font-size:13.5px;line-height:1.4}
+.moi{font-size:13.5px;background:var(--accent-soft);border-radius:8px;padding:8px 10px;line-height:1.4}
+.moi b,.meca b{display:block;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:1px}
+.moi b{color:var(--accent)}
+.tags{display:flex;gap:5px;flex-wrap:wrap}
+.tag{font-size:11px;font-weight:600;padding:2px 7px;border-radius:6px;background:var(--sun-soft);color:#7A5A0E}
+:root[data-theme="dark"] .tag{color:var(--sun)}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .tag{color:var(--sun)} }
+.tag.ok{background:var(--ok-soft);color:var(--ok)} .tag.no{background:var(--hot-soft);color:var(--hot)} .tag.n{background:var(--accent-soft);color:var(--accent)}
+.ctl{display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-top:2px}
+.ctl select{padding:5px 8px;border:1px solid var(--line);border-radius:8px;background:var(--bg);font-size:13px}
+.ctl select.fait{color:var(--ok)} .ctl select.non{color:var(--off)}
+.ctl a{font-size:12.5px}
+.dates{width:100%;border-collapse:collapse;font-size:13.5px;background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.dates th,.dates td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+.dates th{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.dates tr:last-child td{border-bottom:0}
+.dates td:first-child{white-space:nowrap;font-variant-numeric:tabular-nums;font-weight:600}
+.tablewrap{overflow-x:auto}
+.list{display:grid;gap:8px}
+.item{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 12px;display:grid;grid-template-columns:1fr auto;gap:4px 12px;align-items:start;min-width:0}
+.item .t{font-weight:600}
+.item .d{font-size:13px;color:var(--muted);grid-column:1/-1}
+.item .when{font-size:12px;white-space:nowrap;font-variant-numeric:tabular-nums}
+.empty{color:var(--muted);padding:22px 0;font-size:14px;background:var(--card);border:1px dashed var(--line);border-radius:12px;text-align:center}
+.toggle{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.note{font-size:13px;color:var(--muted);background:var(--sun-soft);border-radius:10px;padding:10px 12px;line-height:1.45}
+footer{margin-top:34px;font-size:12px;color:var(--muted);max-width:80ch}
+.toast{position:fixed;left:50%;bottom:calc(18px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--fg);color:var(--bg);padding:8px 14px;border-radius:999px;font-size:13px;opacity:0;transition:opacity .2s;pointer-events:none}
+.toast.show{opacity:1}
+.arch{display:grid;gap:8px}
+.arch button{text-align:left;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+.arch button[aria-pressed="true"]{border-color:var(--accent)}
+</style>
+
+<div class="wrap">
+<header class="top">
+  <div>
+    <div class="eyebrow">CookWithBash · veille hebdomadaire</div>
+    <h1>Radar recettes</h1>
+    <div class="week" id="week">Chargement de la semaine…</div>
+  </div>
+  <div class="note" style="max-width:380px">Quatre entrées chaque semaine : ce qui a pété sur les réseaux, ce que la saison appelle, les classiques qui restent des bangers, et les astuces du moment. Relevé le lundi avec la tâche planifiée.</div>
+</header>
+
+<div class="toolbar">
+  <div class="tabs" id="tabs" role="group" aria-label="Rubriques"></div>
+  <select id="fStatus" aria-label="Filtrer par statut">
+    <option value="">Tout</option>
+    <option value="todo">À faire</option>
+    <option value="fait">Fait</option>
+    <option value="non">Pas pour moi</option>
+  </select>
+</div>
+
+<p class="intro" id="intro"></p>
+<div id="content"></div>
+
+<footer>Règles rappelées sur chaque fiche : jamais une recette identique avant 24 mois, jamais une troisième année d'affilée (perte moyenne observée −63 %), toujours halal et sans alcool, titre qui nomme le plat. Les vues citées sont celles relevées le jour indiqué ; les multiplicateurs (« 68 × ») comparent la vidéo à la médiane habituelle de son compte.</footer>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+(function(){
+'use strict';
+const TABS=[['semaine','Cette semaine'],['saison','C’est la saison'],['classiques','Les classiques'],['astuces','Astuces'],['archives','Semaines passées']];
+const MONTH_FR=['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'];
+
+// ---------- Catalogue saison (référence, dans la page) ----------
+const SAISON=__SAISON__;
+const DATES=__DATES__;
+
+// ---------- Les classiques (toujours recherchés). fait = dernière publication TikTok/Instagram connue ----------
+const CLASSIQUES=__CLASSIQUES__;
+
+// ---------- Astuces (hiver / été) ----------
+const ASTUCES=__ASTUCES__;
+
+const STATUS={todo:'À faire',fait:'Fait',non:'Pas pour moi'};
+let weeks=__SEMAINES__;        // docs de la collection radar, triés du plus récent au plus ancien
+let current=weeks[0]||null;    // doc affiché
+let statuts={};      // id -> {st}
+let tab='semaine';
+let db=null, canWrite=false;
+const $=s=>document.querySelector(s);
+const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+try{ const t=localStorage.getItem('radar-tab'); if(t) tab=t; }catch(e){}
+
+function toast(m){ const t=$('#toast'); t.textContent=m; t.classList.add('show'); clearTimeout(toast.h); toast.h=setTimeout(()=>t.classList.remove('show'),1800); }
+function st(id){ return (statuts[id]&&statuts[id].st)||'todo'; }
+function statusSel(id){ const s=st(id); return `<select class="${s}" data-st="${esc(id)}" aria-label="Statut">${Object.keys(STATUS).map(k=>`<option value="${k}" ${k===s?'selected':''}>${STATUS[k]}</option>`).join('')}</select>`; }
+function passFilter(id){ const f=$('#fStatus').value; return !f || st(id)===f; }
+function link(u){ return (u && /^https:\/\//.test(u)) ? `<a href="${esc(u)}" target="_blank" rel="noopener">voir</a>` : ''; }
+
+function renderTabs(){ $('#tabs').innerHTML=TABS.map(([k,l])=>`<button class="tab" type="button" data-tab="${k}" aria-pressed="${tab===k}">${l}</button>`).join(''); }
+
+function renderWeekHeader(){
+  if(!current){ $('#week').textContent='Aucun relevé enregistré pour l’instant. Le premier arrive avec la tâche du lundi.'; return; }
+  $('#week').innerHTML=`<b>${esc(current.label||current.id)}</b> · relevé le ${esc(current.releve||'')}${weeks.length>1?` · ${weeks.length} semaines archivées`:''}`;
+}
+
+function viralCard(v,i){
+  const id='v:'+(v.id||i);
+  if(!passFilter(id)) return '';
+  const s=st(id);
+  return `<article class="card s-${s}">
+    <div class="row"><h3>${esc(v.t)}</h3><span class="rank">${i+1}</span></div>
+    <div class="src">${esc(v.src||'')}${v.vues?` · <b>${esc(v.vues)}</b>`:''}${v.date?` · ${esc(v.date)}`:''}</div>
+    ${v.tags?`<div class="tags">${v.tags.map(t=>`<span class="tag">${esc(t)}</span>`).join('')}</div>`:''}
+    ${v.meca?`<div class="meca"><b>Pourquoi ça marche</b>${esc(v.meca)}</div>`:''}
+    ${v.moi?`<div class="moi"><b>Ta version</b>${esc(v.moi)}</div>`:''}
+    <div class="ctl">${statusSel(id)}${link(v.url)}</div>
+  </article>`;
+}
+
+function renderSemaine(){
+  if(!current){ return `<div class="empty">Le radar de la semaine s’affichera ici : les recettes qui ont percé (compte, plateforme, vues, date), les formats qui montent, et ta version de chacune. En attendant, les onglets Saison, Classiques et Astuces sont déjà remplis.</div>`; }
+  let h='';
+  if(current.note) h+=`<div class="note">${esc(current.note)}</div>`;
+  h+=`<section class="section"><div class="sec-head"><h2>Ça a pété ces dernières semaines</h2><div class="sub">Vues relevées à la date indiquée. Le multiplicateur compare la vidéo à la médiane habituelle de son compte : c’est lui qui dit si le sujet porte, pas la taille du compte.</div></div><div class="grid">${(current.viral||[]).map(viralCard).join('')||'<div class="empty">Rien dans cette rubrique.</div>'}</div></section>`;
+  if(current.formats&&current.formats.length){
+    h+=`<section class="section"><div class="sec-head"><h2>Les formats qui montent</h2><div class="sub">Mécaniques d’ouverture et de structure, indépendantes du plat.</div></div><div class="list">${current.formats.map(f=>`<div class="item"><div class="t">${esc(f.t)}</div><div class="when">${esc(f.src||'')}</div><div class="d">${esc(f.d||'')}</div></div>`).join('')}</div></section>`;
+  }
+  if(current.focus&&current.focus.length){
+    h+=`<section class="section"><div class="sec-head"><h2>À tourner cette semaine</h2><div class="sub">Le croisement des trois autres rubriques avec ton calendrier.</div></div><div class="list">${current.focus.map((f,i)=>{const id='f:'+(current.id||'')+':'+i; if(!passFilter(id)) return ''; return `<div class="item s-${st(id)}"><div class="t">${esc(f.t)}</div><div class="when">${esc(f.q||'')}</div><div class="d">${esc(f.d||'')}</div><div class="ctl" style="grid-column:1/-1">${statusSel(id)}</div></div>`;}).join('')}</div></section>`;
+  }
+  return h;
+}
+
+function renderSaison(){
+  const m=new Date().getMonth()+1;
+  const key=SAISON[String(m)]?String(m):'default';
+  const now=SAISON[key];
+  const next=SAISON[String(m===12?1:m+1)];
+  let h=`<section class="section"><div class="sec-head"><h2>${esc(now.titre)}</h2><div class="sub">Produits du moment : ${esc(now.produits)}.</div></div><div class="list">${now.plats.map((p,i)=>{const id='s:'+key+':'+i; if(!passFilter(id)) return ''; return `<div class="item s-${st(id)}"><div class="t">${esc(p[0])}</div><div class="when"></div><div class="d">${esc(p[1])}</div><div class="ctl" style="grid-column:1/-1">${statusSel(id)}</div></div>`;}).join('')}</div></section>`;
+  if(next&&next.plats.length) h+=`<section class="section"><div class="sec-head"><h2>Le mois d’après : ${esc(next.titre)}</h2><div class="sub">À préparer maintenant (charcuteries à lancer, commandes chez le boucher, produits à trouver). Produits : ${esc(next.produits)}.</div></div><div class="list">${next.plats.map(p=>`<div class="item"><div class="t">${esc(p[0])}</div><div class="when"></div><div class="d">${esc(p[1])}</div></div>`).join('')}</div></section>`;
+  h+=`<section class="section"><div class="sec-head"><h2>Les dates qui comptent</h2></div><div class="tablewrap"><table class="dates"><thead><tr><th>Date</th><th>Quoi</th><th>La vidéo</th></tr></thead><tbody>${DATES.map(d=>`<tr><td>${esc(d[0])}</td><td>${esc(d[1])}</td><td>${esc(d[2])}</td></tr>`).join('')}</tbody></table></div></section>`;
+  return h;
+}
+
+function renderClassiques(){
+  const libres=CLASSIQUES.filter(c=>c.ok), bloques=CLASSIQUES.filter(c=>!c.ok);
+  const card=(c,i)=>{const id='c:'+c.t; if(!passFilter(id)) return ''; return `<article class="card s-${st(id)}"><div class="row"><h3>${esc(c.t)}</h3><span class="tag ${c.ok?'ok':'no'}">${c.ok?'libre':'bloqué'}</span></div><div class="src">Dernière fois : <b>${esc(c.fait)}</b> · quand : ${esc(c.q)}</div><div class="meca">${esc(c.a)}</div><div class="ctl">${statusSel(id)}</div></article>`;};
+  return `<section class="section"><div class="sec-head"><h2>Les classiques qui restent des bangers</h2><div class="sub">Ce que les gens cherchent toute l’année. « Dernière fois » = ta dernière publication connue ; libre = plus de 24 mois ou jamais fait.</div></div><div class="grid">${libres.map(card).join('')}</div></section>
+  <section class="section"><div class="sec-head"><h2>Bloqués pour l’instant</h2><div class="sub">Refaits trop récemment : seulement un autre plat de la même famille, ou le geste et la page du livre.</div></div><div class="grid">${bloques.map(card).join('')}</div></section>`;
+}
+
+let saisonAstuces=(()=>{const m=new Date().getMonth()+1; return (m>=5&&m<=9)?'ete':'hiver';})();
+function renderAstuces(){
+  const list=ASTUCES[saisonAstuces];
+  return `<section class="section"><div class="toggle"><button class="tab" type="button" data-season="hiver" aria-pressed="${saisonAstuces==='hiver'}">Hiver</button><button class="tab" type="button" data-season="ete" aria-pressed="${saisonAstuces==='ete'}">Été</button></div>
+  <div class="sec-head"><h2>Astuces et petits trucs ${saisonAstuces==='hiver'?'d’hiver':'d’été'}</h2><div class="sub">Format « le problème, l’astuce, la preuve » : 30 à 60 secondes, très enregistré, à glisser entre deux recettes.</div></div>
+  <div class="list">${list.map((a,i)=>{const id='a:'+saisonAstuces+':'+i; if(!passFilter(id)) return ''; return `<div class="item s-${st(id)}"><div class="t">${esc(a[0])}</div><div class="when"></div><div class="d">${esc(a[1])}</div><div class="ctl" style="grid-column:1/-1">${statusSel(id)}</div></div>`;}).join('')}</div></section>`;
+}
+
+function renderArchives(){
+  if(!weeks.length) return `<div class="empty">Les semaines passées s’empileront ici, une par relevé du lundi.</div>`;
+  return `<section class="section"><div class="sec-head"><h2>Semaines passées</h2><div class="sub">Clique une semaine pour l’afficher dans l’onglet « Cette semaine ».</div></div><div class="arch">${weeks.map(w=>`<button type="button" data-week="${esc(w.id)}" aria-pressed="${current&&current.id===w.id}"><b>${esc(w.label||w.id)}</b><div class="src">relevé le ${esc(w.releve||'')} · ${(w.viral||[]).length} vidéos repérées · ${(w.focus||[]).length} à tourner</div></button>`).join('')}</div></section>`;
+}
+
+function render(){
+  renderTabs(); renderWeekHeader();
+  $('#intro').textContent={semaine:'Ce qui a percé récemment, avec la source et le chiffre, puis ta façon de le faire.',saison:'Ce que le calendrier et les étals demandent maintenant, et le mois d’après pour anticiper.',classiques:'Les plats que tout le monde recherche, croisés avec ce que tu as déjà publié.',astuces:'Les formats courts qui font enregistrer, selon la saison.',archives:'Les relevés précédents.'}[tab];
+  $('#content').innerHTML={semaine:renderSemaine,saison:renderSaison,classiques:renderClassiques,astuces:renderAstuces,archives:renderArchives}[tab]();
+}
+
+document.addEventListener('click',e=>{
+  const t=e.target.closest('[data-tab]'); if(t){ tab=t.dataset.tab; try{localStorage.setItem('radar-tab',tab);}catch(x){} render(); return; }
+  const s=e.target.closest('[data-season]'); if(s){ saisonAstuces=s.dataset.season; render(); return; }
+  const w=e.target.closest('[data-week]'); if(w){ current=weeks.find(x=>x.id===w.dataset.week)||current; tab='semaine'; render(); }
+});
+document.addEventListener('change',async e=>{
+  const sel=e.target.closest('select[data-st]');
+  if(sel){ const id=sel.dataset.st, v=sel.value; statuts[id]={st:v}; render();
+    if(db&&canWrite){ try{ await db.collection('statuts').doc(id.replace(/\//g,'_')).set({id,st:v,ts:new Date().toISOString()}); toast('Enregistré'); }catch(err){ toast('Pas enregistré : '+(err&&err.code||'erreur')); } }
+    else toast('Statut gardé sur cette page seulement'); return; }
+  if(e.target.id==='fStatus') render();
+});
+
+render();
+(async()=>{
+  const timer=setTimeout(()=>{ if(!weeks.length){ renderWeekHeader(); } },10000);
+  try{
+    db=await claude.use('db');
+    const user=await claude.use('user');
+    canWrite=!!(user&&(user.isOwner()||user.canEdit()||user.can('data.write')));
+  }catch(e){ db=null; }
+  if(!db){ clearTimeout(timer); return; }
+  try{
+    db.collection('radar').orderBy('start','desc').limit(60).onSnapshot(snap=>{
+      clearTimeout(timer);
+      weeks=[]; (snap.docs||[]).forEach(d=>{ const x=Object.assign({},d.data()||{}); x.id=d.id; weeks.push(x); });
+      weeks.sort((a,b)=>String(b.start||'').localeCompare(String(a.start||'')));
+      if(!current||!weeks.find(w=>w.id===current.id)) current=weeks[0]||null;
+      render();
+    },err=>{ clearTimeout(timer); console.warn(err); });
+    db.collection('statuts').onSnapshot(snap=>{ (snap.docs||[]).forEach(d=>{ const x=d.data()||{}; if(x.id) statuts[x.id]={st:x.st}; }); render(); },err=>console.warn(err));
+  }catch(e){ clearTimeout(timer); console.warn(e); }
+})();
+})();
+</script>
