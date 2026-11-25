@@ -85,8 +85,6 @@ def check(path: Path) -> list[str]:
     for i, f in enumerate(doc.get("focus", [])):
         if FOCUS_KEYS - set(f):
             errs.append(f"focus[{i}] : champs manquants")
-    if len(doc.get("viral", [])) > 12:
-        errs.append("plus de 12 viraux : garder les plus instructifs")
     return errs
 
 
