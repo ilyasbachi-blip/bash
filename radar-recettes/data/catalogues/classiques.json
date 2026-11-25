@@ -5,7 +5,8 @@
     "ok": true,
     "q": "maintenant",
     "a": "« Mes amis sénégalais, maliens : vous le faites comment ? » Le modèle du dibi (340 k TikTok, 1,2 K followers). 5 % de ton audience TikTok est au Sénégal.",
-    "r": "afrique"
+    "r": "afrique",
+    "e": true
   },
   {
     "t": "Tiramisu sans alcool",
@@ -13,7 +14,8 @@
     "ok": true,
     "q": "maintenant",
     "a": "Le dessert le plus recherché de France. Le café fort remplace l’amaretto, et tu le dis dès la première seconde.",
-    "r": "europe"
+    "r": "europe",
+    "e": true
   },
   {
     "t": "Butter chicken",
@@ -21,7 +23,8 @@
     "ok": true,
     "q": "maintenant",
     "a": "24 mois passés. Angle : le beurre fumé, ou la version « sans crème ».",
-    "r": "asie"
+    "r": "asie",
+    "e": true
   },
   {
     "t": "Chili con carne",
@@ -53,7 +56,8 @@
     "ok": true,
     "q": "janvier",
     "a": "La cuisson en couches scellée à la pâte : le geste que personne ne montre en France.",
-    "r": "asie"
+    "r": "asie",
+    "e": true
   },
   {
     "t": "Pastilla au poulet",
@@ -69,7 +73,8 @@
     "ok": true,
     "q": "Aïd",
     "a": "Le feuilletage et le sirop : deux plans satisfaisants.",
-    "r": "orient"
+    "r": "orient",
+    "e": true
   },
   {
     "t": "Mango sticky rice",
@@ -93,7 +98,8 @@
     "ok": true,
     "q": "maintenant",
     "a": "Pâte longue fermentation 48 h, et le pepperoni de bœuf maison dessus.",
-    "r": "europe"
+    "r": "europe",
+    "e": true
   },
   {
     "t": "Carbonara halal",
@@ -109,7 +115,8 @@
     "ok": true,
     "q": "à sortir",
     "a": "Des lasagnes sans viande hachée.",
-    "r": "europe"
+    "r": "europe",
+    "e": true
   },
   {
     "t": "Flan pâtissier",
@@ -125,7 +132,8 @@
     "ok": true,
     "q": "maintenant",
     "a": "Le geste + la page du livre.",
-    "r": "maghreb"
+    "r": "maghreb",
+    "e": true
   },
   {
     "t": "Couscous",
@@ -181,7 +189,8 @@
     "ok": true,
     "q": "maintenant",
     "a": "Libre. Angle : le bacon de bœuf maison dessus.",
-    "r": "ameriques"
+    "r": "ameriques",
+    "e": true
   },
   {
     "t": "Cookies / brownie",
@@ -189,7 +198,8 @@
     "ok": true,
     "q": "décembre",
     "a": "Les classiques sucrés que tu n’as jamais faits : cookies aux pépites, brownie fondant. Enfants, goûter, Noël.",
-    "r": "ameriques"
+    "r": "ameriques",
+    "e": true
   },
   {
     "t": "Gâteau au yaourt « de pro »",
@@ -197,6 +207,115 @@
     "ok": true,
     "q": "maintenant",
     "a": "Le premier gâteau de tout le monde, en version qui ne retombe pas.",
-    "r": "france"
+    "r": "france",
+    "e": true
+  },
+  {
+    "t": "Joue de bœuf fondante",
+    "fait": "tournée le 23 oct. 2026, pas encore publiée",
+    "ok": true,
+    "q": "à sortir maintenant",
+    "r": "france",
+    "e": true,
+    "a": "Tu l’as enregistrée trois fois (Loubna, Chesterfoodies « Les mijotés de grand-mère ép. 1 », Whoogys confite). Braisée sans vin : bouillon, concentré de tomate, jus réduit, purée maison. Hook : « la viande la moins chère chez le boucher, et la plus fondante »."
+  },
+  {
+    "t": "Kabsa",
+    "fait": "jamais",
+    "ok": true,
+    "q": "Ramadan",
+    "r": "orient",
+    "e": true,
+    "a": "Riz au mouton d’Arabie, une marmite, la viande qui se détache. Pour la série Ramadan tour du monde."
+  },
+  {
+    "t": "Maqluba",
+    "fait": "jamais",
+    "ok": true,
+    "q": "Ramadan",
+    "r": "orient",
+    "e": true,
+    "a": "Le retournement de la marmite face caméra, c’est la vidéo. Poulet, aubergines, pommes de terre, riz épicé."
+  },
+  {
+    "t": "Msakhan",
+    "fait": "jamais",
+    "ok": true,
+    "q": "janvier, puis Ramadan",
+    "r": "orient",
+    "e": true,
+    "a": "Poulet au sumac sur oignons confits et pain taboun (Palestine). Très demandé, presque pas de version française soignée."
+  },
+  {
+    "t": "Jollof rice",
+    "fait": "jamais",
+    "ok": true,
+    "q": "maintenant",
+    "r": "afrique",
+    "e": true,
+    "a": "Le riz le plus disputé d’Afrique de l’Ouest (Sénégal, Nigeria, Ghana). Ta version : au four avec les cuisses de poulet, comme Kikifoodies. Le débat en commentaires est garanti."
+  },
+  {
+    "t": "Attiéké au poisson braisé",
+    "fait": "jamais",
+    "ok": true,
+    "q": "printemps, été",
+    "r": "afrique",
+    "e": true,
+    "a": "Dorade marinée moutarde-gingembre-ail, braisée, attiéké, oignons-tomates. Deux vidéos enregistrées : tu veux le faire."
+  },
+  {
+    "t": "Thiakry (dégué)",
+    "fait": "jamais",
+    "ok": true,
+    "q": "Ramadan",
+    "r": "afrique",
+    "e": true,
+    "a": "Couscous de mil au lait fermenté sucré : le dessert d’iftar d’Afrique de l’Ouest, dix minutes, zéro cuisson."
+  },
+  {
+    "t": "Kafteji de Kairouan",
+    "fait": "jamais",
+    "ok": true,
+    "q": "maintenant",
+    "r": "maghreb",
+    "e": true,
+    "a": "Légumes frits hachés au couteau avec l’œuf : la street food tunisienne qui n’a pas encore sa vidéo française."
+  },
+  {
+    "t": "Birria tacos",
+    "fait": "jamais",
+    "ok": true,
+    "q": "maintenant",
+    "r": "ameriques",
+    "e": true,
+    "a": "« Épisode 1 : Mexique » d’un tour du monde. Bœuf mijoté, consommé, tacos trempés : fondant + croustillant + trempette, la trinité virale."
+  },
+  {
+    "t": "Panuozzo",
+    "fait": "jamais",
+    "ok": true,
+    "q": "maintenant",
+    "r": "europe",
+    "e": true,
+    "a": "Le sandwich de pâte à pizza de Naples. Deux versions enregistrées plus le sandwich Trisapori : reprends ta pâte à pizza de juillet 2024."
+  },
+  {
+    "t": "Mille-feuille de pommes de terre",
+    "fait": "jamais",
+    "ok": true,
+    "q": "décembre, fêtes",
+    "r": "france",
+    "e": true,
+    "a": "Tranches fines, beurre, pressées une nuit, coupées en pavés et dorées : le plat « pour impressionner » des fêtes, et la coupe qui fait rester."
+  },
+  {
+    "t": "Kabuli pulao",
+    "fait": "jamais",
+    "ok": true,
+    "q": "janvier",
+    "r": "asie",
+    "e": true,
+    "a": "Riz afghan à l’agneau, carottes, raisins secs : un plat de fête sans version halal française qui marche."
   }
 ]

@@ -62,7 +62,16 @@ Ce qui y figure (titre du plat, priorité, jour) est public comme le reste du d�
 
 - `saison.json` : par mois (`"11"`, `"12"`, `"1"`, `"2"`…), titre, plats `[nom, pourquoi]`, produits. Ajouter les mois manquants au fil de l'année.
 - `dates.json` : `[date, quoi, la vidéo]`.
-- `classiques.json` : `t`, `fait` (dernière publication connue), `ok` (libre = jamais fait ou plus de 24 mois), `q` (quand), `a` (angle), `r` (coin du monde : `maghreb`, `afrique`, `orient`, `asie`, `france`, `europe`, `ameriques` ; la page filtre dessus).
+- `classiques.json` : `t`, `fait` (dernière publication connue), `ok` (libre = jamais fait ou plus de 24 mois), `q` (quand), `a` (angle), `r` (coin du monde : `maghreb`, `afrique`, `orient`, `asie`, `france`, `europe`, `ameriques` ; la page filtre dessus), `e` (true = Ilyes l'a lui-même enregistré sur Instagram ou TikTok).
+
+## Les enregistrements d'Ilyes (source à relire chaque mois)
+
+Ce qu'il enregistre dit ce qu'il a envie de tourner. À lire avec Chrome, connecté à ses comptes, en lecture seule :
+
+- Instagram : https://www.instagram.com/cookwithbash/saved/ — collections « Recette » (×2, ~160 posts), « Recettes » (×2), « Bricks », « Soupe », « A faire » (restaurants), « Algérie » (voyage), et « Toutes les publications » pour les plus récents.
+- TikTok : profil @cookwithbash, onglet Favoris (2 286 vidéos, 39 collections) — « Recette à faire 🍽️ » (42), « Recette ramadan » (66), « Brick » (15), « Recettes hiver 🥶 » (ail fermenté au miel), « Juice », « Huile d'olive », « Restaurant » (31).
+
+Relevé du 26 novembre 2026 : les thèmes qui reviennent sont la charcuterie maison (magret séché, cachir, cervelas halal, bologna de poulet, saucisse maison), le « mieux fait maison » (bouillon concentré ×3, mayonnaise ×3, harissa, feuilles de brick, paneer, labneh, yaourt), la joue de bœuf (×3), les séries numérotées (« épisode 1 : Mexique », « Ramadan from around the world », « Mieux fait maison ép. 21 », « Fléchette & Fourchette », « day 4/30 »), les pommes de terre (roast potatoes ×4, mille-feuille, accordéon, maakouda ×3), les laitages orientaux (sütlaç, kazandibi, mouhalabié), l'Afrique de l'Ouest (dibi ×3, jollof ×2, thiakry ×2, attiéké, bissap) et la prep Ramadan en lots congelés. Les catalogues portent l'étiquette « dans tes enregistrements » sur les lignes concernées.
 - `astuces.json` : `hiver`, `ete`, `bases` (épices et mélanges), `frigo` (bases du frigo et du congélateur), `[titre, détail, étiquette facultative]`. La page bascule sur été de mai à septembre.
 - Une ligne cochée « Pas pour moi » disparaît de la page (le filtre « Pas pour moi » la montre à nouveau) ; elle reste dans le catalogue, la skill ne la repropose pas.
 

@@ -1,143 +1,171 @@
 {
- "1": {
-  "titre": "Janvier : galette, chandeleur en vue, et la fenêtre Ramadan s’ouvre le 11",
-  "plats": [
-   [
-    "Galette des rois sans rhum (3 au 6 janv.)",
-    "La recherche la plus forte de la semaine."
-   ],
-   [
-    "Steak sauce au poivre, sans cognac",
-    "Janv. 2025 (936 k) : libre en janvier 2027 avec le flambage remplacé."
-   ],
-   [
-    "Blanquette de veau sans vin blanc",
-    "Plat d’hiver très recherché. Le remplaçant du vin en trois parties."
-   ],
-   [
-    "Fondue savoyarde sans vin ni kirsch",
-    "Les Savoyards vont commenter, c’est le but."
-   ],
-   [
-    "Yennayer (12 janv.) : couscous aux sept légumes ou rechta ?",
-    "La rechta a eu trois passages : prendre un plat de Yennayer jamais filmé (trida, chakhchoukha « le geste »)."
-   ],
-   [
-    "Stock Ramadan : publication quotidienne à partir du 11",
-    "Rien ne passe devant."
-   ]
-  ],
-  "produits": "agrumes, kiwis, choux, poireaux, endives, courges de garde, pommes, poires"
- },
- "2": {
-  "titre": "Février : Chandeleur, puis Ramadan (8 février 2027)",
-  "plats": [
-   [
-    "Crêpes Suzette sans alcool (2 févr.)",
-    "Le flambage, sans Grand Marnier."
-   ],
-   [
-    "Ftour comme à Istanbul, Dakar, Jakarta",
-    "Un ftour, un pays."
-   ],
-   [
-    "Beignets le soir du ftour (Mardi gras, 9 févr.)",
-    "Sfenj déjà vu trois fois : zlabia ou beignets fourrés."
-   ]
-  ],
-  "produits": "agrumes, endives, poireaux, choux, mâche, topinambours"
- },
- "11": {
-  "titre": "Fin novembre : le froid s’installe",
-  "plats": [
-   [
-    "Soupe à l’oignon gratinée, sans vin",
-    "Le bouillon de bœuf fait le travail du vin blanc. Gros plan sur le fromage qui gratine."
-   ],
-   [
-    "Velouté de potimarron au ras el hanout",
-    "Nouveauté, 20 minutes, très enregistré. Le ras el hanout est ta signature."
-   ],
-   [
-    "Joue de bœuf braisée, jus nappant",
-    "Déjà tournée le 23 octobre : à sortir maintenant, c’est le cœur de la saison des mijotés."
-   ],
-   [
-    "Tlitli sauce blanche",
-    "Classique algérien d’hiver, dernier passage en 2023 : libre."
-   ],
-   [
-    "Tajine aux pruneaux (lham hlou)",
-    "Dernier passage mars 2024 (806 k) : libre, et c’est un plat de fête d’hiver."
-   ],
-   [
-    "Hachis parmentier « de cantine, en mieux »",
-    "Un passage en oct. 2024 (427 k). Angle : la purée au beurre noisette."
-   ],
-   [
-    "Endives au jambon de dinde maison",
-    "Débloqué par le pilote charcuterie. Le plat détesté à la cantine, qu’on n’avait pas le droit de manger."
-   ],
-   [
-    "Poires pochées sans vin",
-    "Jus de raisin, épices, zestes : le dessert des restaurants, en 30 minutes."
-   ],
-   [
-    "Dinde de Thanksgiving en halal (26 nov.)",
-    "Optionnel. Elle prépare le réveillon de décembre."
-   ]
-  ],
-  "produits": "courges, choux, poireaux, endives, châtaignes, coings, agrumes, poires, pommes, topinambours"
- },
- "12": {
-  "titre": "Décembre : fromage fondu, fêtes, et le stock Ramadan",
-  "plats": [
-   [
-    "Raclette halal avec la charcuterie maison",
-    "Le pilote jambon de dinde + bacon de bœuf la rend possible. Puis la vidéo « restes de raclette » le lundi."
-   ],
-   [
-    "Tartiflette aux lardons de bœuf, sans vin blanc",
-    "Janvier aussi. Le reblochon seul suffit, pas d’alcool."
-   ],
-   [
-    "Mont d’or : seulement « ce qu’il y a autour »",
-    "Troisième année d’affilée : le fromage n’est plus le sujet, la planche de charcuterie maison l’est."
-   ],
-   [
-    "Gigot d’agneau en cuisson lente (réveillon)",
-    "Un passage, déc. 2024 (1,4 M). Il remplace l’épaule confite, déjà vue trois fois."
-   ],
-   [
-    "Magret de canard à l’orange + magret séché",
-    "Déc. 2024 (576 k). Lancer le magret séché trois semaines avant."
-   ],
-   [
-    "Chocolat chaud épais, façon chocolaterie",
-    "Format court, très recherché en décembre. Sans alcool par nature."
-   ],
-   [
-    "Vin chaud sans vin",
-    "Jus de raisin, orange, cannelle, badiane : la boisson des marchés de Noël pour tout le monde."
-   ],
-   [
-    "Biscuits de Noël (bredele) et pain d’épices",
-    "Famille, enfants, cadeaux faits maison : enregistrements garantis."
-   ],
-   [
-    "Bûche sans alcool",
-    "Le réveillon que beaucoup de familles musulmanes font quand même."
-   ],
-   [
-    "Saumon gravlax",
-    "Repost TikTok de la vidéo 2025 à Noël (1,1 M), pas de re-tournage."
-   ]
-  ],
-  "produits": "clémentines, oranges, pamplemousse, mâche, chou, poireau, céleri-rave, marrons, dattes Deglet Nour (nouvelle récolte)"
- },
- "default": {
-  "titre": "Saison",
-  "plats": [],
-  "produits": ""
- }
+  "1": {
+    "titre": "Janvier : galette, chandeleur en vue, et la fenêtre Ramadan s’ouvre le 11",
+    "plats": [
+      [
+        "Galette des rois sans rhum (3 au 6 janv.)",
+        "La recherche la plus forte de la semaine."
+      ],
+      [
+        "Steak sauce au poivre, sans cognac",
+        "Janv. 2025 (936 k) : libre en janvier 2027 avec le flambage remplacé."
+      ],
+      [
+        "Blanquette de veau sans vin blanc",
+        "Plat d’hiver très recherché. Le remplaçant du vin en trois parties."
+      ],
+      [
+        "Fondue savoyarde sans vin ni kirsch",
+        "Les Savoyards vont commenter, c’est le but."
+      ],
+      [
+        "Yennayer (12 janv.) : couscous aux sept légumes ou rechta ?",
+        "La rechta a eu trois passages : prendre un plat de Yennayer jamais filmé (trida, chakhchoukha « le geste »)."
+      ],
+      [
+        "Stock Ramadan : publication quotidienne à partir du 11",
+        "Rien ne passe devant."
+      ],
+      [
+        "Prep week Ramadan : 40 bricks, 40 nems, 5 marinades, au congélateur",
+        "Ce que tes enregistrements TikTok répètent (Loubna, Moribyan, Kauscooks) : une vidéo « je prépare mon Ramadan en deux soirs », tournée fin janvier, qui renvoie vers chaque recette."
+      ],
+      [
+        "Msakhan",
+        "Poulet au sumac et oignons confits sur pain : le plat palestinien que tu as enregistré, parfait avant le Ramadan."
+      ]
+    ],
+    "produits": "agrumes, kiwis, choux, poireaux, endives, courges de garde, pommes, poires"
+  },
+  "2": {
+    "titre": "Février : Chandeleur, puis Ramadan (8 février 2027)",
+    "plats": [
+      [
+        "Crêpes Suzette sans alcool (2 févr.)",
+        "Le flambage, sans Grand Marnier."
+      ],
+      [
+        "Ftour comme à Istanbul, Dakar, Jakarta",
+        "Un ftour, un pays."
+      ],
+      [
+        "Beignets le soir du ftour (Mardi gras, 9 févr.)",
+        "Sfenj déjà vu trois fois : zlabia ou beignets fourrés."
+      ],
+      [
+        "Shawarma cones croustillants",
+        "Enregistré deux fois : le shawarma roulé en cornet de pain, frit ou au four, le cornet qui croque à l’image. Ta version : poulet mariné yaourt, sauce blanche."
+      ],
+      [
+        "Maqluba",
+        "Le retournement de la marmite devant la caméra. Un iftar complet dans un plat."
+      ],
+      [
+        "Thiakry pour l’iftar",
+        "Le dessert sénégalais au lait fermenté, dix minutes, zéro cuisson : l’Afrique de l’Ouest dans ta série Ramadan."
+      ],
+      [
+        "Milkshake banane-dattes",
+        "La boisson du ftour qui tient au ventre : bananes, dattes, lait, glaçons. 20 secondes de vidéo, très enregistré."
+      ],
+      [
+        "Bricks : trois farces de bourek et les briouates sans friture",
+        "Une vidéo, trois farces (viande-œuf, poulet-fromage, thon-pomme de terre) ; les briouates au four pour ceux qui ne veulent pas frire."
+      ]
+    ],
+    "produits": "agrumes, endives, poireaux, choux, mâche, topinambours"
+  },
+  "11": {
+    "titre": "Fin novembre : le froid s’installe",
+    "plats": [
+      [
+        "Soupe à l’oignon gratinée, sans vin",
+        "Le bouillon de bœuf fait le travail du vin blanc. Gros plan sur le fromage qui gratine."
+      ],
+      [
+        "Velouté de potimarron au ras el hanout",
+        "Nouveauté, 20 minutes, très enregistré. Le ras el hanout est ta signature."
+      ],
+      [
+        "Joue de bœuf braisée, jus nappant",
+        "Déjà tournée le 23 octobre : à sortir maintenant, c’est le cœur de la saison des mijotés."
+      ],
+      [
+        "Tlitli sauce blanche",
+        "Classique algérien d’hiver, dernier passage en 2023 : libre."
+      ],
+      [
+        "Tajine aux pruneaux (lham hlou)",
+        "Dernier passage mars 2024 (806 k) : libre, et c’est un plat de fête d’hiver."
+      ],
+      [
+        "Hachis parmentier « de cantine, en mieux »",
+        "Un passage en oct. 2024 (427 k). Angle : la purée au beurre noisette."
+      ],
+      [
+        "Endives au jambon de dinde maison",
+        "Débloqué par le pilote charcuterie. Le plat détesté à la cantine, qu’on n’avait pas le droit de manger."
+      ],
+      [
+        "Poires pochées sans vin",
+        "Jus de raisin, épices, zestes : le dessert des restaurants, en 30 minutes."
+      ],
+      [
+        "Dinde de Thanksgiving en halal (26 nov.)",
+        "Optionnel. Elle prépare le réveillon de décembre."
+      ]
+    ],
+    "produits": "courges, choux, poireaux, endives, châtaignes, coings, agrumes, poires, pommes, topinambours"
+  },
+  "12": {
+    "titre": "Décembre : fromage fondu, fêtes, et le stock Ramadan",
+    "plats": [
+      [
+        "Raclette halal avec la charcuterie maison",
+        "Le pilote jambon de dinde + bacon de bœuf la rend possible. Puis la vidéo « restes de raclette » le lundi."
+      ],
+      [
+        "Tartiflette aux lardons de bœuf, sans vin blanc",
+        "Janvier aussi. Le reblochon seul suffit, pas d’alcool."
+      ],
+      [
+        "Mont d’or : seulement « ce qu’il y a autour »",
+        "Troisième année d’affilée : le fromage n’est plus le sujet, la planche de charcuterie maison l’est."
+      ],
+      [
+        "Gigot d’agneau en cuisson lente (réveillon)",
+        "Un passage, déc. 2024 (1,4 M). Il remplace l’épaule confite, déjà vue trois fois."
+      ],
+      [
+        "Magret de canard à l’orange + magret séché",
+        "Déc. 2024 (576 k). Lancer le magret séché trois semaines avant."
+      ],
+      [
+        "Chocolat chaud épais, façon chocolaterie",
+        "Format court, très recherché en décembre. Sans alcool par nature."
+      ],
+      [
+        "Vin chaud sans vin",
+        "Jus de raisin, orange, cannelle, badiane : la boisson des marchés de Noël pour tout le monde."
+      ],
+      [
+        "Biscuits de Noël (bredele) et pain d’épices",
+        "Famille, enfants, cadeaux faits maison : enregistrements garantis."
+      ],
+      [
+        "Bûche sans alcool",
+        "Le réveillon que beaucoup de familles musulmanes font quand même."
+      ],
+      [
+        "Saumon gravlax",
+        "Repost TikTok de la vidéo 2025 à Noël (1,1 M), pas de re-tournage."
+      ]
+    ],
+    "produits": "clémentines, oranges, pamplemousse, mâche, chou, poireau, céleri-rave, marrons, dattes Deglet Nour (nouvelle récolte)"
+  },
+  "default": {
+    "titre": "Saison",
+    "plats": [],
+    "produits": ""
+  }
 }

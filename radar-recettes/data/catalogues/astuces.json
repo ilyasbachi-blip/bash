@@ -8,7 +8,7 @@
     [
       "Ail, gingembre, miel (et citron) en bocal",
       "Le remède de l’hiver, une cuillère dans l’eau chaude. Version rapide au frigo, ou version fermentée 3 semaines (le miel devient liquide et pétille). Très envoyé aux proches.",
-      "demandé souvent"
+      "demandé souvent · dans tes enregistrements ×5"
     ],
     [
       "Ginger shot",
@@ -16,7 +16,8 @@
     ],
     [
       "Bouillon cube maison",
-      "« Tout le monde en a un dans sa cuisine. Lis la liste. » Pilote de la série Arrête d’acheter."
+      "« Tout le monde en a un dans sa cuisine. Lis la liste. » Pilote de la série Arrête d’acheter.",
+      "dans tes enregistrements ×3"
     ],
     [
       "Sirop de gingembre et chaï maison",
@@ -56,7 +57,13 @@
     ],
     [
       "Harissa maison",
-      "Piments séchés réhydratés, ail, carvi : le bocal rouge qui tient deux mois."
+      "Piments séchés réhydratés, ail, carvi : le bocal rouge qui tient deux mois.",
+      "dans tes enregistrements"
+    ],
+    [
+      "Date bark façon snickers",
+      "Pâte de dattes étalée fine, beurre de cacahuète, chocolat noir, fleur de sel, 20 minutes au congélateur, cassé en éclats. Le snack d’iftar et de goûter qui remplace la barre du commerce.",
+      "dans tes enregistrements"
     ]
   ],
   "ete": [
@@ -87,6 +94,21 @@
     [
       "Marinades barbecue (3 marinades, un poulet, en aveugle)",
       "Kiwi, yaourt, café : laquelle attendrit vraiment ?"
+    ],
+    [
+      "Confiture de nèfles (mchimcha)",
+      "Le classique des confitures algériennes, en juin quand les nèfles sont à 2 € le kilo : dénoyautées, sucre, citron, 30 minutes. Pot étiqueté à la fin.",
+      "dans tes enregistrements"
+    ],
+    [
+      "Citronnade mangue-pêche et concentré de citronnade",
+      "Un concentré (2 kg de citrons, sucre, une nuit) qu’on dilue toute la semaine ; la version mangue-pêche-lait concentré pour le dessert à boire.",
+      "dans tes enregistrements"
+    ],
+    [
+      "Créponé, le sorbet citron d’Oran et de Béjaïa",
+      "Citron, sucre, blanc d’œuf monté : le sorbet des glaciers algériens (Da Ali Boulaglace, Béjaïa, depuis 1958). Sans sorbetière, une vidéo « c’est quoi le créponé » pour ceux qui ne connaissent pas.",
+      "dans tes enregistrements"
     ]
   ],
   "bases": [
@@ -96,7 +118,8 @@
     ],
     [
       "Harissa maison",
-      "Piments séchés réhydratés, ail, carvi, coriandre, huile d’olive : le bocal rouge qui tient deux mois au frigo."
+      "Piments séchés réhydratés, ail, carvi, coriandre, huile d’olive : le bocal rouge qui tient deux mois au frigo.",
+      "dans tes enregistrements"
     ],
     [
       "Tabel karwiya",
@@ -105,7 +128,8 @@
     ],
     [
       "Mélange chawarma et shish taouk",
-      "Sumac, cardamome, cannelle, quatre-épices, ail : la marinade du poulet du sandwich, sans le sachet."
+      "Sumac, cardamome, cannelle, quatre-épices, ail : la marinade du poulet du sandwich, sans le sachet.",
+      "shawarma dans tes enregistrements ×6"
     ],
     [
       "Baharat, les sept épices libanaises",
@@ -152,7 +176,7 @@
     [
       "Pâte d’ail",
       "Ail pelé mixé avec un peu d’huile et de sel : un pot au frigo pour la semaine, ou des glaçons au congélateur pour trois mois. Dix minutes de moins chaque soir.",
-      "demandé souvent"
+      "demandé souvent · dans tes enregistrements"
     ],
     [
       "Beurre maison, et ses saveurs",
@@ -165,15 +189,18 @@
     ],
     [
       "Bouillon de poulet maison en glaçons",
-      "La carcasse du poulet rôti du dimanche : deux heures, puis des cubes au congélateur. La suite logique du « rien ne se jette »."
+      "La carcasse du poulet rôti du dimanche : deux heures, puis des cubes au congélateur. La suite logique du « rien ne se jette ».",
+      "concentré dans tes enregistrements"
     ],
     [
       "Labneh maison",
-      "Yaourt nature, sel, un torchon, une nuit : le fromage frais du petit-déjeuner et des sandwichs, pour le prix d’un yaourt."
+      "Yaourt nature, sel, un torchon, une nuit : le fromage frais du petit-déjeuner et des sandwichs, pour le prix d’un yaourt.",
+      "dans tes enregistrements"
     ],
     [
       "Pickles d’oignon rouge",
-      "Vinaigre, eau, sucre, sel, 30 minutes : le rose qui réveille tacos, kebab et dibi. Format très court."
+      "Vinaigre, eau, sucre, sel, 30 minutes : le rose qui réveille tacos, kebab et dibi. Format très court.",
+      "dans tes enregistrements"
     ],
     [
       "Huile pimentée à l’ail et au sésame",
@@ -185,7 +212,8 @@
     ],
     [
       "Yaourt maison sans yaourtière",
-      "Un litre de lait entier, un yaourt, un four éteint : huit pots, et le labneh derrière."
+      "Un litre de lait entier, un yaourt, un four éteint : huit pots, et le labneh derrière.",
+      "dans tes enregistrements"
     ],
     [
       "Herbes séchées et zestes d’agrumes au four",
@@ -198,6 +226,21 @@
     [
       "Croûtons, chapelure et pain perdu salé",
       "Le pain de la semaine ne se jette pas : trois usages en une vidéo, à publier un lundi."
+    ],
+    [
+      "Mayonnaise maison, et ses dérivées",
+      "Un jaune, moutarde, huile en filet, 2 minutes au fouet, puis trois sauces : ranch (yaourt, ail, aneth), César (anchois, parmesan, citron), cocktail. Tu en as enregistré trois versions : c’est la série « arrête d’acheter » la plus simple à tourner.",
+      "dans tes enregistrements ×3"
+    ],
+    [
+      "Feuilles de brick maison, 3 ingrédients",
+      "Farine, eau, sel, une pâte liquide tamponnée au pinceau sur la poêle retournée : zéro additif, et l’ouverture « vous achetez ça 2,50 € le paquet ». À sortir en janvier, avant les stocks Ramadan.",
+      "dans tes enregistrements"
+    ],
+    [
+      "Paneer, le fromage frais d’un litre de lait",
+      "Lait entier bouilli, jus de citron, le caillé égoutté dans un torchon, pressé une heure : le fromage à cuire du butter paneer et des bricks. Le lait qui caille à l’image, c’est le hook.",
+      "dans tes enregistrements"
     ]
   ]
 }
