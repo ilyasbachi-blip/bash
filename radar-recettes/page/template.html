@@ -205,8 +205,8 @@ function renderClassiques(){
 let saisonAstuces=(()=>{const m=new Date().getMonth()+1; return (m>=5&&m<=9)?'ete':'hiver';})();
 function renderAstuces(){
   const list=ASTUCES[saisonAstuces];
-  return `<section class="section"><div class="toggle"><button class="tab" type="button" data-season="hiver" aria-pressed="${saisonAstuces==='hiver'}">Hiver</button><button class="tab" type="button" data-season="ete" aria-pressed="${saisonAstuces==='ete'}">Été</button></div>
-  <div class="sec-head"><h2>Astuces et petits trucs ${saisonAstuces==='hiver'?'d’hiver':'d’été'}</h2><div class="sub">Format « le problème, l’astuce, la preuve » : 30 à 60 secondes, très enregistré, à glisser entre deux recettes.</div></div>
+  return `<section class="section"><div class="toggle"><button class="tab" type="button" data-season="hiver" aria-pressed="${saisonAstuces==='hiver'}">Hiver</button><button class="tab" type="button" data-season="ete" aria-pressed="${saisonAstuces==='ete'}">Été</button><button class="tab" type="button" data-season="bases" aria-pressed="${saisonAstuces==='bases'}">Épices et bases maison</button></div>
+  <div class="sec-head"><h2>${saisonAstuces==='bases'?'Faire ses propres épices et ses bases':'Astuces et petits trucs '+(saisonAstuces==='hiver'?'d’hiver':'d’été')}</h2><div class="sub">${saisonAstuces==='bases'?'Toute l’année. Mécanique de la série Arrête d’acheter : l’étiquette du pot du commerce lue à voix haute (le sel en premier ingrédient), le mélange maison pesé, le pot étiqueté à la fin. Un mélange = une vidéo, et chaque mélange renvoie à une recette déjà publiée.':'Format « le problème, l’astuce, la preuve » : 30 à 60 secondes, très enregistré, à glisser entre deux recettes.'}</div></div>
   <div class="list">${list.map((a,i)=>{const id='a:'+saisonAstuces+':'+i; if(!passFilter(id)) return ''; return `<div class="item s-${st(id)}"><div class="t">${esc(a[0])}</div><div class="when"></div><div class="d">${esc(a[1])}</div><div class="ctl" style="grid-column:1/-1">${statusSel(id)}</div></div>`;}).join('')}</div></section>`;
 }
 
