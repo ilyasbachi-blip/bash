@@ -62,8 +62,9 @@ Ce qui y figure (titre du plat, priorité, jour) est public comme le reste du d�
 
 - `saison.json` : par mois (`"11"`, `"12"`, `"1"`, `"2"`…), titre, plats `[nom, pourquoi]`, produits. Ajouter les mois manquants au fil de l'année.
 - `dates.json` : `[date, quoi, la vidéo]`.
-- `classiques.json` : `t`, `fait` (dernière publication connue), `ok` (libre = jamais fait ou plus de 24 mois), `q` (quand), `a` (angle).
-- `astuces.json` : `hiver` et `ete`, `[titre, détail]`. La page bascule sur été de mai à septembre.
+- `classiques.json` : `t`, `fait` (dernière publication connue), `ok` (libre = jamais fait ou plus de 24 mois), `q` (quand), `a` (angle), `r` (coin du monde : `maghreb`, `afrique`, `orient`, `asie`, `france`, `europe`, `ameriques` ; la page filtre dessus).
+- `astuces.json` : `hiver`, `ete`, `bases` (épices et mélanges), `frigo` (bases du frigo et du congélateur), `[titre, détail, étiquette facultative]`. La page bascule sur été de mai à septembre.
+- Une ligne cochée « Pas pour moi » disparaît de la page (le filtre « Pas pour moi » la montre à nouveau) ; elle reste dans le catalogue, la skill ne la repropose pas.
 
 ## Analyse des comptes (`analyse/`)
 

@@ -1,198 +1,203 @@
 {
- "hiver": [
-  [
-   "Ail confit à l’huile",
-   "Gousses pelées couvertes d’huile, 90-100 °C, 45 minutes à 1 heure : fondantes, dorées. Au frigo sous l’huile 2 semaines, ou congelées. Le plan : la cuillère qui s’enfonce dans la gousse.",
-   "demandé souvent"
+  "hiver": [
+    [
+      "Ail confit à l’huile",
+      "Gousses pelées couvertes d’huile, 90-100 °C, 45 minutes à 1 heure : fondantes, dorées. Au frigo sous l’huile 2 semaines, ou congelées. Le plan : la cuillère qui s’enfonce dans la gousse.",
+      "demandé souvent"
+    ],
+    [
+      "Ail, gingembre, miel (et citron) en bocal",
+      "Le remède de l’hiver, une cuillère dans l’eau chaude. Version rapide au frigo, ou version fermentée 3 semaines (le miel devient liquide et pétille). Très envoyé aux proches.",
+      "demandé souvent"
+    ],
+    [
+      "Ginger shot",
+      "Déc. 2023 (1,5 M) : plus de 36 mois, libre. Version sans extracteur."
+    ],
+    [
+      "Bouillon cube maison",
+      "« Tout le monde en a un dans sa cuisine. Lis la liste. » Pilote de la série Arrête d’acheter."
+    ],
+    [
+      "Sirop de gingembre et chaï maison",
+      "Deux boissons chaudes, un seul tournage."
+    ],
+    [
+      "Oignons frits maison",
+      "Le topping de la loubia et du dibi, fait une fois pour deux semaines."
+    ],
+    [
+      "Beurre d’ail et persil en rouleau",
+      "Congelé, tranché : sur le poulet, le pain, les légumes."
+    ],
+    [
+      "Congeler les herbes dans l’huile",
+      "Bac à glaçons : persil, coriandre, ail. Astuce anti-gaspi, très enregistrée."
+    ],
+    [
+      "Pain rassis : croûtons, chapelure, pain perdu salé",
+      "Le lundi, avec les restes du week-end."
+    ],
+    [
+      "Rattraper une mayonnaise qui tranche",
+      "30 secondes, un jaune, et la sauce César de la semaine dernière en exemple."
+    ],
+    [
+      "Pourquoi ta viande rend de l’eau",
+      "Le problème, l’astuce (sécher, ne pas surcharger la poêle), la preuve à l’écran."
+    ],
+    [
+      "La semoule qui colle",
+      "Le problème, l’astuce, la preuve. Format court entre deux séries."
+    ],
+    [
+      "Dersa en bocal",
+      "Déjà au stock Ramadan : « 10 minutes de moins chaque soir pendant un mois. »"
+    ],
+    [
+      "Harissa maison",
+      "Piments séchés réhydratés, ail, carvi : le bocal rouge qui tient deux mois."
+    ]
   ],
-  [
-   "Ail, gingembre, miel (et citron) en bocal",
-   "Le remède de l’hiver, une cuillère dans l’eau chaude. Version rapide au frigo, ou version fermentée 3 semaines (le miel devient liquide et pétille). Très envoyé aux proches.",
-   "demandé souvent"
+  "ete": [
+    [
+      "Glaces sans sorbetière",
+      "Vanille, pistache, chocolat : la base lait concentré + crème fouettée."
+    ],
+    [
+      "Sorbets (mangue faite 2025, coco et melon faits 2026)",
+      "Prendre d’autres fruits : fraise, citron, pêche."
+    ],
+    [
+      "Limonades : cherbet (août 2025), brésilienne (mai 2026)",
+      "Libres à l’été 2027 avec un nouvel angle, ou d’autres : menthe-concombre, hibiscus."
+    ],
+    [
+      "Granité, thé glacé maison, eaux infusées",
+      "Formats très courts, très partagés par temps chaud."
+    ],
+    [
+      "Salades fraîches : pastèque-feta (2024), shirazi (2026)",
+      "Prendre la slata mechouia, la salade d’oranges, le fattouche."
+    ],
+    [
+      "Gaspacho et soupes froides",
+      "Tomate, concombre, pastèque."
+    ],
+    [
+      "Marinades barbecue (3 marinades, un poulet, en aveugle)",
+      "Kiwi, yaourt, café : laquelle attendrit vraiment ?"
+    ]
   ],
-  [
-   "Ginger shot",
-   "Déc. 2023 (1,5 M) : plus de 36 mois, libre. Version sans extracteur."
+  "bases": [
+    [
+      "Ras el hanout pesé, pas « à l’œil »",
+      "Le mélange que tout le monde achète sans savoir ce qu’il y a dedans. Tes grammages exacts, le pot étiqueté : c’est aussi la base de l’ebook Ramadan."
+    ],
+    [
+      "Harissa maison",
+      "Piments séchés réhydratés, ail, carvi, coriandre, huile d’olive : le bocal rouge qui tient deux mois au frigo."
+    ],
+    [
+      "Tabel karwiya",
+      "Coriandre et carvi torréfiés, ail séché, piment : la poudre de l’omek houria, de la slata mechouia et des kefta. On te la demande en commentaire depuis des mois et elle est presque introuvable en France.",
+      "demandé souvent"
+    ],
+    [
+      "Mélange chawarma et shish taouk",
+      "Sumac, cardamome, cannelle, quatre-épices, ail : la marinade du poulet du sandwich, sans le sachet."
+    ],
+    [
+      "Baharat, les sept épices libanaises",
+      "Le mélange des kefta, du riz et des farces. Torréfié à sec avant de moudre : c’est le plan sonore."
+    ],
+    [
+      "Garam masala torréfié",
+      "Pour le butter chicken et le biryani : graines entières grillées à la poêle, moulues chaudes. L’odeur fait la vidéo."
+    ],
+    [
+      "Épices tajine en pot",
+      "Curcuma, gingembre, cannelle, poivre, un peu de safran : la cuillère unique qui fait gagner cinq minutes chaque soir."
+    ],
+    [
+      "Za’atar maison",
+      "Thym, sumac, sésame grillé, sel : sur le pain à l’huile d’olive au petit-déjeuner. Format « le problème, l’astuce, la preuve »."
+    ],
+    [
+      "Dukkah",
+      "Noisettes, sésame, coriandre, cumin concassés : le pain trempé dans l’huile puis dans le dukkah, plan satisfaisant garanti."
+    ],
+    [
+      "Sel au citron confit et sel aux herbes",
+      "Le citron confit de novembre séché et mixé avec du gros sel : un pot, un cadeau, une vidéo."
+    ],
+    [
+      "Poudre d’ail et d’oignon maison",
+      "Déshydratés au four à 70 °C puis mixés : l’ingrédient numéro un des sachets industriels, fait pour rien."
+    ],
+    [
+      "Mélange pour frites et poulet frit (façon cajun)",
+      "Paprika fumé, ail, oignon, origan, cayenne : la version sans glutamate ni arômes du pot du commerce."
+    ],
+    [
+      "Smen, le beurre clarifié fermenté",
+      "Celui du couscous et de la rfissa de ta mère : le geste qu’on ne montre jamais, et qui se garde des mois."
+    ],
+    [
+      "Chermoula en cubes (ail, coriandre, cumin, citron)",
+      "Bac à glaçons : un cube par poisson ou poulet. Ta réponse à la « marinade magique » à 2,5 M de vues."
+    ]
   ],
-  [
-   "Bouillon cube maison",
-   "« Tout le monde en a un dans sa cuisine. Lis la liste. » Pilote de la série Arrête d’acheter."
-  ],
-  [
-   "Sirop de gingembre et chaï maison",
-   "Deux boissons chaudes, un seul tournage."
-  ],
-  [
-   "Oignons frits maison",
-   "Le topping de la loubia et du dibi, fait une fois pour deux semaines."
-  ],
-  [
-   "Beurre d’ail et persil en rouleau",
-   "Congelé, tranché : sur le poulet, le pain, les légumes."
-  ],
-  [
-   "Congeler les herbes dans l’huile",
-   "Bac à glaçons : persil, coriandre, ail. Astuce anti-gaspi, très enregistrée."
-  ],
-  [
-   "Pain rassis : croûtons, chapelure, pain perdu salé",
-   "Le lundi, avec les restes du week-end."
-  ],
-  [
-   "Rattraper une mayonnaise qui tranche",
-   "30 secondes, un jaune, et la sauce César de la semaine dernière en exemple."
-  ],
-  [
-   "Pourquoi ta viande rend de l’eau",
-   "Le problème, l’astuce (sécher, ne pas surcharger la poêle), la preuve à l’écran."
-  ],
-  [
-   "La semoule qui colle",
-   "Le problème, l’astuce, la preuve. Format court entre deux séries."
-  ],
-  [
-   "Dersa en bocal",
-   "Déjà au stock Ramadan : « 10 minutes de moins chaque soir pendant un mois. »"
-  ],
-  [
-   "Harissa maison",
-   "Piments séchés réhydratés, ail, carvi : le bocal rouge qui tient deux mois."
+  "frigo": [
+    [
+      "Pâte d’ail",
+      "Ail pelé mixé avec un peu d’huile et de sel : un pot au frigo pour la semaine, ou des glaçons au congélateur pour trois mois. Dix minutes de moins chaque soir.",
+      "demandé souvent"
+    ],
+    [
+      "Beurre maison, et ses saveurs",
+      "50 cl de crème entière froide fouettée jusqu’à ce qu’elle tranche (5 à 8 minutes), le babeurre égoutté et gardé pour les crêpes ou les msemen, le beurre rincé à l’eau glacée et pétri. Puis quatre saveurs : ail et persil, harissa et citron confit, miel et fleur de sel, ras el hanout. Hook : « vous payez 4 € le beurre aux herbes, il vous coûte 1,20 € ». Le moment où la crème se sépare, c’est la preuve à l’image. Roulé dans du papier cuisson, un mois au congélateur, et chaque saveur renvoie à une recette : le ail-persil sur le pain du vendredi, l’harissa sur le poulet rôti.",
+      "idée Ilyes"
+    ],
+    [
+      "Oignons caramélisés en bocal",
+      "Un kilo d’oignons, 40 minutes, et de quoi relever burgers, tartes et sandwichs pendant deux semaines."
+    ],
+    [
+      "Bouillon de poulet maison en glaçons",
+      "La carcasse du poulet rôti du dimanche : deux heures, puis des cubes au congélateur. La suite logique du « rien ne se jette »."
+    ],
+    [
+      "Labneh maison",
+      "Yaourt nature, sel, un torchon, une nuit : le fromage frais du petit-déjeuner et des sandwichs, pour le prix d’un yaourt."
+    ],
+    [
+      "Pickles d’oignon rouge",
+      "Vinaigre, eau, sucre, sel, 30 minutes : le rose qui réveille tacos, kebab et dibi. Format très court."
+    ],
+    [
+      "Huile pimentée à l’ail et au sésame",
+      "Huile chaude versée sur piment, ail, sésame et sel : le crépitement, c’est le hook. Sur les nouilles, les œufs, la chorba."
+    ],
+    [
+      "Pâte de dattes",
+      "Deglet Nour dénoyautées, un filet d’eau de fleur d’oranger, mixées : la farce des makrout et des dattes fourrées, prête pour le Ramadan."
+    ],
+    [
+      "Yaourt maison sans yaourtière",
+      "Un litre de lait entier, un yaourt, un four éteint : huit pots, et le labneh derrière."
+    ],
+    [
+      "Herbes séchées et zestes d’agrumes au four",
+      "Menthe, thym, coriandre, zestes de citron et d’orange, à 60 °C : les pots de l’hiver, et le sel aux herbes qui va avec."
+    ],
+    [
+      "Citron confit express",
+      "Quand on n’a pas attendu les quatre semaines : citrons en quartiers, sel, 30 minutes à feu doux. À côté de la version lente de novembre."
+    ],
+    [
+      "Croûtons, chapelure et pain perdu salé",
+      "Le pain de la semaine ne se jette pas : trois usages en une vidéo, à publier un lundi."
+    ]
   ]
- ],
- "ete": [
-  [
-   "Glaces sans sorbetière",
-   "Vanille, pistache, chocolat : la base lait concentré + crème fouettée."
-  ],
-  [
-   "Sorbets (mangue faite 2025, coco et melon faits 2026)",
-   "Prendre d’autres fruits : fraise, citron, pêche."
-  ],
-  [
-   "Limonades : cherbet (août 2025), brésilienne (mai 2026)",
-   "Libres à l’été 2027 avec un nouvel angle, ou d’autres : menthe-concombre, hibiscus."
-  ],
-  [
-   "Granité, thé glacé maison, eaux infusées",
-   "Formats très courts, très partagés par temps chaud."
-  ],
-  [
-   "Salades fraîches : pastèque-feta (2024), shirazi (2026)",
-   "Prendre la slata mechouia, la salade d’oranges, le fattouche."
-  ],
-  [
-   "Gaspacho et soupes froides",
-   "Tomate, concombre, pastèque."
-  ],
-  [
-   "Marinades barbecue (3 marinades, un poulet, en aveugle)",
-   "Kiwi, yaourt, café : laquelle attendrit vraiment ?"
-  ]
- ],
- "bases": [
-  [
-   "Ras el hanout pesé, pas « à l’œil »",
-   "Le mélange que tout le monde achète sans savoir ce qu’il y a dedans. Tes grammages exacts, le pot étiqueté : c’est aussi la base de l’ebook Ramadan."
-  ],
-  [
-   "Harissa maison",
-   "Piments séchés réhydratés, ail, carvi, coriandre, huile d’olive : le bocal rouge qui tient deux mois au frigo."
-  ],
-  [
-   "Tabel karwiya",
-   "Coriandre et carvi torréfiés, ail séché, piment : la poudre de l’omek houria, de la slata mechouia et des kefta. On te la demande en commentaire depuis des mois et elle est presque introuvable en France.",
-   "demandé souvent"
-  ],
-  [
-   "Mélange chawarma et shish taouk",
-   "Sumac, cardamome, cannelle, quatre-épices, ail : la marinade du poulet du sandwich, sans le sachet."
-  ],
-  [
-   "Baharat, les sept épices libanaises",
-   "Le mélange des kefta, du riz et des farces. Torréfié à sec avant de moudre : c’est le plan sonore."
-  ],
-  [
-   "Garam masala torréfié",
-   "Pour le butter chicken et le biryani : graines entières grillées à la poêle, moulues chaudes. L’odeur fait la vidéo."
-  ],
-  [
-   "Épices tajine en pot",
-   "Curcuma, gingembre, cannelle, poivre, un peu de safran : la cuillère unique qui fait gagner cinq minutes chaque soir."
-  ],
-  [
-   "Za’atar maison",
-   "Thym, sumac, sésame grillé, sel : sur le pain à l’huile d’olive au petit-déjeuner. Format « le problème, l’astuce, la preuve »."
-  ],
-  [
-   "Dukkah",
-   "Noisettes, sésame, coriandre, cumin concassés : le pain trempé dans l’huile puis dans le dukkah, plan satisfaisant garanti."
-  ],
-  [
-   "Sel au citron confit et sel aux herbes",
-   "Le citron confit de novembre séché et mixé avec du gros sel : un pot, un cadeau, une vidéo."
-  ],
-  [
-   "Poudre d’ail et d’oignon maison",
-   "Déshydratés au four à 70 °C puis mixés : l’ingrédient numéro un des sachets industriels, fait pour rien."
-  ],
-  [
-   "Mélange pour frites et poulet frit (façon cajun)",
-   "Paprika fumé, ail, oignon, origan, cayenne : la version sans glutamate ni arômes du pot du commerce."
-  ],
-  [
-   "Smen, le beurre clarifié fermenté",
-   "Celui du couscous et de la rfissa de ta mère : le geste qu’on ne montre jamais, et qui se garde des mois."
-  ],
-  [
-   "Chermoula en cubes (ail, coriandre, cumin, citron)",
-   "Bac à glaçons : un cube par poisson ou poulet. Ta réponse à la « marinade magique » à 2,5 M de vues."
-  ]
- ],
- "frigo": [
-  [
-   "Pâte d’ail",
-   "Ail pelé mixé avec un peu d’huile et de sel : un pot au frigo pour la semaine, ou des glaçons au congélateur pour trois mois. Dix minutes de moins chaque soir.",
-   "demandé souvent"
-  ],
-  [
-   "Oignons caramélisés en bocal",
-   "Un kilo d’oignons, 40 minutes, et de quoi relever burgers, tartes et sandwichs pendant deux semaines."
-  ],
-  [
-   "Bouillon de poulet maison en glaçons",
-   "La carcasse du poulet rôti du dimanche : deux heures, puis des cubes au congélateur. La suite logique du « rien ne se jette »."
-  ],
-  [
-   "Labneh maison",
-   "Yaourt nature, sel, un torchon, une nuit : le fromage frais du petit-déjeuner et des sandwichs, pour le prix d’un yaourt."
-  ],
-  [
-   "Pickles d’oignon rouge",
-   "Vinaigre, eau, sucre, sel, 30 minutes : le rose qui réveille tacos, kebab et dibi. Format très court."
-  ],
-  [
-   "Huile pimentée à l’ail et au sésame",
-   "Huile chaude versée sur piment, ail, sésame et sel : le crépitement, c’est le hook. Sur les nouilles, les œufs, la chorba."
-  ],
-  [
-   "Pâte de dattes",
-   "Deglet Nour dénoyautées, un filet d’eau de fleur d’oranger, mixées : la farce des makrout et des dattes fourrées, prête pour le Ramadan."
-  ],
-  [
-   "Yaourt maison sans yaourtière",
-   "Un litre de lait entier, un yaourt, un four éteint : huit pots, et le labneh derrière."
-  ],
-  [
-   "Herbes séchées et zestes d’agrumes au four",
-   "Menthe, thym, coriandre, zestes de citron et d’orange, à 60 °C : les pots de l’hiver, et le sel aux herbes qui va avec."
-  ],
-  [
-   "Citron confit express",
-   "Quand on n’a pas attendu les quatre semaines : citrons en quartiers, sel, 30 minutes à feu doux. À côté de la version lente de novembre."
-  ],
-  [
-   "Croûtons, chapelure et pain perdu salé",
-   "Le pain de la semaine ne se jette pas : trois usages en une vidéo, à publier un lundi."
-  ]
- ]
 }

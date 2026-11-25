@@ -50,7 +50,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .sec-head .sub{color:var(--muted);font-size:13px;max-width:72ch}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:10px}
 .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 12px 10px;display:flex;flex-direction:column;gap:8px;min-width:0}
-.card.s-fait{border-color:var(--ok)} .card.s-non{opacity:.55}
+.card.s-fait{border-color:var(--ok)} .s-non{opacity:.7;border-style:dashed}
 .row{display:flex;gap:8px;align-items:flex-start;justify-content:space-between}
 .rank{font-family:var(--display);font-weight:800;font-size:13px;color:var(--accent);background:var(--accent-soft);border-radius:8px;padding:2px 7px;white-space:nowrap}
 .src{font-size:12.5px;color:var(--muted);line-height:1.4}
@@ -97,7 +97,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .item .d{font-size:13px;color:var(--muted);grid-column:1/-1}
 .item .when{font-size:12px;white-space:nowrap;font-variant-numeric:tabular-nums}
 .empty{color:var(--muted);padding:22px 0;font-size:14px;background:var(--card);border:1px dashed var(--line);border-radius:12px;text-align:center}
-.toggle{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.toggle{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;margin-top:14px}
 .note{font-size:13px;color:var(--muted);background:var(--sun-soft);border-radius:10px;padding:10px 12px;line-height:1.45}
 footer{margin-top:34px;font-size:12px;color:var(--muted);max-width:80ch}
 .toast{position:fixed;left:50%;bottom:calc(18px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--fg);color:var(--bg);padding:8px 14px;border-radius:999px;font-size:13px;opacity:0;transition:opacity .2s;pointer-events:none}
@@ -195,7 +195,10 @@ function ctl(id,extra){
   }
   return h+(extra||'')+`</div>`;
 }
-function passFilter(id){ const f=$('#fStatus').value; if(!f) return true; if(f==='none') return !st(id); return st(id)===f; }
+// Sans filtre : tout sauf « Pas pour moi », qui disparaît de la page (le filtre « Pas pour moi » permet de le revoir et de le rattraper).
+function passFilter(id){ const f=$('#fStatus').value; if(!f) return st(id)!=='non'; if(f==='none') return !st(id); return st(id)===f; }
+const orEmpty=(h,m)=>h||`<div class="empty">${m||'Tout est trié ici : rien à afficher.'}</div>`;
+function nonCount(){ return Object.keys(statuts).filter(id=>statuts[id].st==='non').length; }
 function link(u){ return (u && /^https:\/\//.test(u)) ? `<a href="${esc(u)}" target="_blank" rel="noopener">voir</a>` : ''; }
 function todos(){ return Object.keys(statuts).filter(id=>statuts[id].st==='todo').map(id=>Object.assign({id},meta(id),statuts[id])); }
 
@@ -224,12 +227,12 @@ function renderSemaine(){
   if(!current){ return `<div class="empty">Le radar de la semaine s’affichera ici : les recettes qui ont percé (compte, plateforme, vues, date), les formats qui montent, et ta version de chacune. En attendant, les onglets Saison, Classiques et Astuces sont déjà remplis.</div>`; }
   let h='';
   if(current.note) h+=`<div class="note">${esc(current.note)}</div>`;
-  h+=`<section class="section"><div class="sec-head"><h2>Ça a pété ces dernières semaines</h2><div class="sub">Vues relevées à la date indiquée. Le multiplicateur compare la vidéo à la médiane habituelle de son compte : c’est lui qui dit si le sujet porte, pas la taille du compte.</div></div><div class="grid">${(current.viral||[]).map(viralCard).join('')||'<div class="empty">Rien dans cette rubrique.</div>'}</div></section>`;
+  h+=`<section class="section"><div class="sec-head"><h2>Ça a pété ces dernières semaines</h2><div class="sub">Vues relevées à la date indiquée. Le multiplicateur compare la vidéo à la médiane habituelle de son compte : c’est lui qui dit si le sujet porte, pas la taille du compte.</div></div><div class="grid">${orEmpty((current.viral||[]).map(viralCard).join(''),'Rien à afficher : tout est trié ou filtré.')}</div></section>`;
   if(current.formats&&current.formats.length){
     h+=`<section class="section"><div class="sec-head"><h2>Les formats qui montent</h2><div class="sub">Mécaniques d’ouverture et de structure, indépendantes du plat.</div></div><div class="list">${current.formats.map(f=>`<div class="item"><div class="t">${esc(f.t)}</div><div class="when">${esc(f.src||'')}</div><div class="d">${esc(f.d||'')}</div></div>`).join('')}</div></section>`;
   }
   if(current.focus&&current.focus.length){
-    h+=`<section class="section"><div class="sec-head"><h2>À tourner cette semaine</h2><div class="sub">Le croisement des trois autres rubriques avec ton calendrier.</div></div><div class="list">${current.focus.map((f,i)=>{const id='f:'+(current.id||'')+':'+i; if(!passFilter(id)) return ''; return `<div class="item s-${st(id)}"><div class="t">${esc(f.t)}</div><div class="when">${esc(f.q||'')}</div><div class="d">${esc(f.d||'')}</div>${ctl(id)}</div>`;}).join('')}</div></section>`;
+    h+=`<section class="section"><div class="sec-head"><h2>À tourner cette semaine</h2><div class="sub">Le croisement des trois autres rubriques avec ton calendrier.</div></div><div class="list">${orEmpty(current.focus.map((f,i)=>{const id='f:'+(current.id||'')+':'+i; if(!passFilter(id)) return ''; return `<div class="item s-${st(id)}"><div class="t">${esc(f.t)}</div><div class="when">${esc(f.q||'')}</div><div class="d">${esc(f.d||'')}</div>${ctl(id)}</div>`;}).join(''))}</div></section>`;
   }
   return h;
 }
@@ -239,17 +242,23 @@ function renderSaison(){
   const key=SAISON[String(m)]?String(m):'default';
   const now=SAISON[key];
   const next=SAISON[String(m===12?1:m+1)];
-  let h=`<section class="section"><div class="sec-head"><h2>${esc(now.titre)}</h2><div class="sub">Produits du moment : ${esc(now.produits)}.</div></div><div class="list">${now.plats.map((p,i)=>{const id='s:'+key+':'+i; if(!passFilter(id)) return ''; return `<div class="item s-${st(id)}"><div class="t">${esc(p[0])}</div><div class="when"></div><div class="d">${esc(p[1])}</div>${ctl(id)}</div>`;}).join('')}</div></section>`;
+  let h=`<section class="section"><div class="sec-head"><h2>${esc(now.titre)}</h2><div class="sub">Produits du moment : ${esc(now.produits)}.</div></div><div class="list">${orEmpty(now.plats.map((p,i)=>{const id='s:'+key+':'+i; if(!passFilter(id)) return ''; return `<div class="item s-${st(id)}"><div class="t">${esc(p[0])}</div><div class="when"></div><div class="d">${esc(p[1])}</div>${ctl(id)}</div>`;}).join(''))}</div></section>`;
   if(next&&next.plats.length) h+=`<section class="section"><div class="sec-head"><h2>Le mois d’après : ${esc(next.titre)}</h2><div class="sub">À préparer maintenant (charcuteries à lancer, commandes chez le boucher, produits à trouver). Produits : ${esc(next.produits)}.</div></div><div class="list">${next.plats.map(p=>`<div class="item"><div class="t">${esc(p[0])}</div><div class="when"></div><div class="d">${esc(p[1])}</div></div>`).join('')}</div></section>`;
   h+=`<section class="section"><div class="sec-head"><h2>Les dates qui comptent</h2></div><div class="tablewrap"><table class="dates"><thead><tr><th>Date</th><th>Quoi</th><th>La vidéo</th></tr></thead><tbody>${DATES.map(d=>`<tr><td>${esc(d[0])}</td><td>${esc(d[1])}</td><td>${esc(d[2])}</td></tr>`).join('')}</tbody></table></div></section>`;
   return h;
 }
 
+const REGIONS=[['','Partout'],['maghreb','Algérie & Maghreb'],['afrique','Afrique de l’Ouest'],['orient','Moyen-Orient & Turquie'],['asie','Asie'],['france','France'],['europe','Europe'],['ameriques','Amériques']];
+const REGION_LABEL=Object.fromEntries(REGIONS);
+let region=''; try{ region=localStorage.getItem('radar-region')||''; }catch(e){}
 function renderClassiques(){
-  const libres=CLASSIQUES.filter(c=>c.ok), bloques=CLASSIQUES.filter(c=>!c.ok);
-  const card=(c,i)=>{const id='c:'+c.t; if(!passFilter(id)) return ''; return `<article class="card s-${st(id)}"><div class="row"><h3>${esc(c.t)}</h3><span class="tag ${c.ok?'ok':'no'}">${c.ok?'libre':'bloqué'}</span></div><div class="src">Dernière fois : <b>${esc(c.fait)}</b> · quand : ${esc(c.q)}</div><div class="meca">${esc(c.a)}</div>${ctl(id)}</article>`;};
-  return `<section class="section"><div class="sec-head"><h2>Les classiques qui restent des bangers</h2><div class="sub">Ce que les gens cherchent toute l’année. « Dernière fois » = ta dernière publication connue ; libre = plus de 24 mois ou jamais fait.</div></div><div class="grid">${libres.map(card).join('')}</div></section>
-  <section class="section"><div class="sec-head"><h2>Bloqués pour l’instant</h2><div class="sub">Refaits trop récemment : seulement un autre plat de la même famille, ou le geste et la page du livre.</div></div><div class="grid">${bloques.map(card).join('')}</div></section>`;
+  const inRegion=c=>!region||c.r===region;
+  const libres=CLASSIQUES.filter(c=>c.ok&&inRegion(c)), bloques=CLASSIQUES.filter(c=>!c.ok&&inRegion(c));
+  const counts={}; CLASSIQUES.forEach(c=>{ if(st('c:'+c.t)!=='non'){ counts[c.r]=(counts[c.r]||0)+1; counts['']=(counts['']||0)+1; } });
+  const toggle=`<div class="toggle" role="group" aria-label="Coin du monde">${REGIONS.filter(([k])=>counts[k]).map(([k,l])=>`<button class="tab" type="button" data-region="${k}" aria-pressed="${region===k}">${l} · ${counts[k]}</button>`).join('')}</div>`;
+  const card=(c,i)=>{const id='c:'+c.t; if(!passFilter(id)) return ''; return `<article class="card s-${st(id)}"><div class="row"><h3>${esc(c.t)}</h3><span class="tag ${c.ok?'ok':'no'}">${c.ok?'libre':'bloqué'}</span></div><div class="tags"><span class="tag n">${esc(REGION_LABEL[c.r]||'')}</span></div><div class="src">Dernière fois : <b>${esc(c.fait)}</b> · quand : ${esc(c.q)}</div><div class="meca">${esc(c.a)}</div>${ctl(id)}</article>`;};
+  return `${toggle}<section class="section"><div class="sec-head"><h2>Les classiques qui restent des bangers${region?` · ${esc(REGION_LABEL[region])}`:''}</h2><div class="sub">Ce que les gens cherchent toute l’année. « Dernière fois » = ta dernière publication connue ; libre = plus de 24 mois ou jamais fait.</div></div><div class="grid">${orEmpty(libres.map(card).join(''))}</div></section>
+  <section class="section"><div class="sec-head"><h2>Bloqués pour l’instant</h2><div class="sub">Refaits trop récemment : seulement un autre plat de la même famille, ou le geste et la page du livre.</div></div><div class="grid">${orEmpty(bloques.map(card).join(''))}</div></section>`;
 }
 
 let saisonAstuces=(()=>{const m=new Date().getMonth()+1; return (m>=5&&m<=9)?'ete':'hiver';})();
@@ -257,7 +266,7 @@ function renderAstuces(){
   const list=ASTUCES[saisonAstuces];
   return `<section class="section"><div class="toggle"><button class="tab" type="button" data-season="hiver" aria-pressed="${saisonAstuces==='hiver'}">Hiver</button><button class="tab" type="button" data-season="ete" aria-pressed="${saisonAstuces==='ete'}">Été</button><button class="tab" type="button" data-season="bases" aria-pressed="${saisonAstuces==='bases'}">Épices et mélanges</button><button class="tab" type="button" data-season="frigo" aria-pressed="${saisonAstuces==='frigo'}">Bases du frigo et du congélateur</button></div>
   <div class="sec-head"><h2>${({bases:'Faire ses propres épices et mélanges',frigo:'Les bases du frigo et du congélateur',hiver:'Astuces et petits trucs d’hiver',ete:'Astuces et petits trucs d’été'})[saisonAstuces]}</h2><div class="sub">${({bases:'Toute l’année. Mécanique de la série Arrête d’acheter : l’étiquette du pot du commerce lue à voix haute (le sel en premier ingrédient), le mélange maison pesé, le pot étiqueté à la fin. Un mélange = une vidéo, et chaque mélange renvoie à une recette déjà publiée.',frigo:'Toute l’année. Ce qu’on prépare une fois pour gagner du temps toute la semaine : un bocal, un bac à glaçons, un torchon. Mécanique : le geste du dimanche, puis le plat de mardi qui va plus vite.',hiver:'Format « le problème, l’astuce, la preuve » : 30 à 60 secondes, très enregistré, à glisser entre deux recettes.',ete:'Format « le problème, l’astuce, la preuve » : 30 à 60 secondes, très enregistré, à glisser entre deux recettes.'})[saisonAstuces]}</div></div>
-  <div class="list">${list.map((a,i)=>{const id='a:'+saisonAstuces+':'+i; if(!passFilter(id)) return ''; return `<div class="item s-${st(id)}"><div class="t">${esc(a[0])}</div><div class="when">${a[2]?`<span class="tag n">${esc(a[2])}</span>`:''}</div><div class="d">${esc(a[1])}</div>${ctl(id)}</div>`;}).join('')}</div></section>`;
+  <div class="list">${orEmpty(list.map((a,i)=>{const id='a:'+saisonAstuces+':'+i; if(!passFilter(id)) return ''; return `<div class="item s-${st(id)}"><div class="t">${esc(a[0])}</div><div class="when">${a[2]?`<span class="tag n">${esc(a[2])}</span>`:''}</div><div class="d">${esc(a[1])}</div>${ctl(id)}</div>`;}).join(''))}</div></section>`;
 }
 
 function renderTourner(){
@@ -283,7 +292,8 @@ function renderArchives(){
 
 function render(){
   renderTabs(); renderWeekHeader();
-  $('#intro').textContent={semaine:'Ce qui a percé récemment, avec la source et le chiffre, puis ta façon de le faire.',tourner:'Tout ce que tu as coché « À faire », par priorité : ce qu’il y a à tourner, et quand.',saison:'Ce que le calendrier et les étals demandent maintenant, et le mois d’après pour anticiper.',classiques:'Les plats que tout le monde recherche, croisés avec ce que tu as déjà publié.',astuces:'Les formats courts qui font enregistrer, selon la saison.',archives:'Les relevés précédents.'}[tab];
+  { const o=$('#fStatus').querySelector('option[value="non"]'); const n=nonCount(); if(o) o.textContent='Pas pour moi'+(n?` (${n} retiré${n>1?'s':''})`:''); }
+  $('#intro').textContent={semaine:'Ce qui a percé récemment, avec la source et le chiffre, puis ta façon de le faire.',tourner:'Tout ce que tu as coché « À faire », par priorité : ce qu’il y a à tourner, et quand.',saison:'Ce que le calendrier et les étals demandent maintenant, et le mois d’après pour anticiper.',classiques:'Les plats que tout le monde recherche, croisés avec ce que tu as déjà publié. Choisis un coin du monde.',astuces:'Les formats courts qui font enregistrer, selon la saison.',archives:'Les relevés précédents.'}[tab];
   $('#content').innerHTML={semaine:renderSemaine,tourner:renderTourner,saison:renderSaison,classiques:renderClassiques,astuces:renderAstuces,archives:renderArchives}[tab]();
 }
 
@@ -300,13 +310,15 @@ async function saveLine(id){
   const r={st:stSel?stSel.value:prev.st||'', prio:prSel?prSel.value:(prev.prio||''), date:dt?dt.value:(prev.date||''), t:m.t||prev.t||id, o:m.o||prev.o||'', url:m.url||prev.url||'', moi:m.moi||prev.moi||''};
   statuts[id]=r; render();
   if(r.st==='todo'&&!r.prio) toast('Et la priorité ?');
-  if(db&&canWrite){ try{ await db.collection('statuts').doc(id.replace(/\//g,'_')).set(Object.assign({id,ts:new Date().toISOString()},r)); if(r.prio||r.st!=='todo') toast('Enregistré'); }catch(err){ toast('Pas enregistré : '+(err&&err.code||'erreur')); } }
+  if(r.st==='non') toast('Retiré de la page (filtre « Pas pour moi » pour le revoir)');
+  if(db&&canWrite){ try{ await db.collection('statuts').doc(id.replace(/\//g,'_')).set(Object.assign({id,ts:new Date().toISOString()},r)); if(r.st!=='non'&&(r.prio||r.st!=='todo')) toast('Enregistré'); }catch(err){ toast('Pas enregistré : '+(err&&err.code||'erreur')); } }
   else toast('Gardé sur cette page seulement');
 }
 
 document.addEventListener('click',e=>{
   const t=e.target.closest('[data-tab]'); if(t){ tab=t.dataset.tab; try{localStorage.setItem('radar-tab',tab);}catch(x){} render(); return; }
   const s=e.target.closest('[data-season]'); if(s){ saisonAstuces=s.dataset.season; render(); return; }
+  const rg=e.target.closest('[data-region]'); if(rg){ region=rg.dataset.region; try{localStorage.setItem('radar-region',region);}catch(x){} render(); return; }
   const w=e.target.closest('[data-week]'); if(w){ current=weeks.find(x=>x.id===w.dataset.week)||current; tab='semaine'; render(); return; }
   const c=e.target.closest('[data-copy]'); if(c){ copyText(c.dataset.copy); }
 });
