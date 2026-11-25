@@ -19,7 +19,8 @@ Dépôt d'Ilyes Bachi (CookWithBash) : créateur culinaire français, cuisine al
 
 ## Où vivent les autres pièces (côté claude.ai, pas dans ce dépôt)
 
-- Page Radar publiée : https://claude.ai/artifact/ByEUqfxkt9FGEdzhYZo7ku (sa base contient les semaines et les statuts cochés par Ilyes).
+- Page Radar publiée : https://claude.ai/artifact/ByEUqfxkt9FGEdzhYZo7ku (sa base contient les semaines et les statuts cochés par Ilyes : À faire + priorité + jour de tournage).
+- Calendrier des tournages (abonnement Apple Calendrier) : `radar-recettes/dist/a-tourner.ics`, régénéré par `radar-recettes/scripts/calendrier.py` depuis les statuts ; quand Ilyes dit « mets à jour mon calendrier », c'est cette procédure (README du radar).
 - Liste virale du lundi : https://claude.ai/artifact/DQXpBfbUh6DLe7yNoMmVaF
 - Banque d'idées : https://claude.ai/artifact/XYhgKE3jiWiyYbTeHkD2zm
 - Base publications & suivi éditorial (Google Sheet) : https://docs.google.com/spreadsheets/d/11Zy8prS_eFCba4k7-R41zxKK0LurBrQuFRrIiOxPRSI/edit

@@ -17,10 +17,11 @@ Objectif : produire le document de la semaine (`radar-recettes/data/semaines/AAA
 6. **Vérifier** : `python3 radar-recettes/scripts/semaine.py check radar-recettes/data/semaines/<id>.json` doit passer.
 7. **Reconstruire** : `python3 radar-recettes/scripts/build_page.py`.
 8. **Publier** : si la session a l'outil `ArtifactData`, écrire le même document dans la base de la page publiée (url https://claude.ai/artifact/ByEUqfxkt9FGEdzhYZo7ku, collection `radar`, doc_id = identifiant de la semaine ; `if_version` si le document existe). Sinon, si la session a l'outil `Artifact`, republier `dist/radar-recettes.html` sur la même url (sans repasser `capabilities` ni `icon`). Sinon, laisser le fichier dans le dépôt et le dire.
-9. **Bilan en 8 lignes** : la vidéo la plus instructive et sa version CookWithBash, les 2 ou 3 focus avec leur hook, l'astuce de la semaine, ce qui n'a pas pu être relevé.
+9. **Calendrier** : exporter la collection `statuts` de la page (ArtifactData, action `list`, `out_dir`), lancer `python3 radar-recettes/scripts/calendrier.py <dossier>` puis commit + push de `radar-recettes/dist/a-tourner.ics` sur `main` : c'est le fichier que lit l'abonnement Apple Calendrier d'Ilyes. Les lignes « À faire » sans jour ne s'y trouvent pas : les lui rappeler dans le bilan.
+10. **Bilan en 8 lignes** : la vidéo la plus instructive et sa version CookWithBash, les 2 ou 3 focus avec leur hook, l'astuce de la semaine, ce qui n'a pas pu être relevé.
 
 ## Garde-fous
 
 - Catalogues (`saison.json`, `classiques.json`, `astuces.json`, `dates.json`) : les mettre à jour quand Ilyes publie une recette (champ `fait` d'un classique, passage de « libre » à « bloqué ») ou quand une date approche ; une modification de catalogue demande un `build_page.py` et une republication de la page.
 - Ne jamais inventer de vues, de date ou de compte. Une vidéo dont on n'a lu que la légende est signalée comme telle.
-- Les statuts cochés par Ilyes sur la page (collection `statuts` de la base) priment : ne pas reproposer un « pas pour moi ».
+- Les statuts cochés par Ilyes sur la page (collection `statuts` de la base) priment : ne pas reproposer un « pas pour moi » ; un « À faire » priorité 1 sans jour fixé est le premier focus de la semaine.

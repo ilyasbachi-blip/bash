@@ -65,9 +65,26 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .tag{color:var(--sun)} }
 .tag.ok{background:var(--ok-soft);color:var(--ok)} .tag.no{background:var(--hot-soft);color:var(--hot)} .tag.n{background:var(--accent-soft);color:var(--accent)}
 .ctl{display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-top:2px}
-.ctl select{padding:5px 8px;border:1px solid var(--line);border-radius:8px;background:var(--bg);font-size:13px}
-.ctl select.fait{color:var(--ok)} .ctl select.non{color:var(--off)}
+.item .ctl{grid-column:1/-1}
+.ctl select,.ctl input{padding:5px 8px;border:1px solid var(--line);border-radius:8px;background:var(--bg);font-size:13px;min-width:0}
+.ctl select.todo{color:var(--accent);border-color:var(--accent)} .ctl select.fait{color:var(--ok)} .ctl select.non{color:var(--off)}
+.ctl select.p1{color:var(--hot);border-color:var(--hot)} .ctl select.p2{color:#7A5A0E;border-color:var(--sun)} .ctl select.p3{color:var(--ok)} .ctl select.p0{color:var(--hot);background:var(--hot-soft)}
+:root[data-theme="dark"] .ctl select.p2{color:var(--sun)}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .ctl select.p2{color:var(--sun)} }
+.ctl input[type=date]{font-variant-numeric:tabular-nums;max-width:160px}
+.ctl .lbl{font-size:12px;color:var(--muted)}
 .ctl a{font-size:12.5px}
+.prio{font-size:11px;font-weight:700;padding:2px 7px;border-radius:6px;white-space:nowrap}
+.prio.p1{background:var(--hot-soft);color:var(--hot)} .prio.p2{background:var(--sun-soft);color:#7A5A0E} .prio.p3{background:var(--ok-soft);color:var(--ok)} .prio.p0{background:var(--line);color:var(--muted)}
+:root[data-theme="dark"] .prio.p2{color:var(--sun)}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .prio.p2{color:var(--sun)} }
+.late{color:var(--hot);font-weight:600}
+.item .o{font-size:12px;color:var(--muted);grid-column:1/-1}
+.cal{display:grid;gap:8px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px;font-size:13.5px;line-height:1.45}
+.cal code{display:block;font-size:12.5px;word-break:break-all;background:var(--bg);border-radius:8px;padding:8px 10px;user-select:all}
+.cal .btns{display:flex;gap:8px;flex-wrap:wrap}
+.cal button{border:1px solid var(--line);background:var(--bg);border-radius:999px;padding:6px 12px;font-size:13px;font-weight:500}
+.cal details{font-size:13px;color:var(--muted)} .cal summary{cursor:pointer;color:var(--accent);font-weight:500}
 .dates{width:100%;border-collapse:collapse;font-size:13.5px;background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden}
 .dates th,.dates td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
 .dates th{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600}
@@ -107,6 +124,7 @@ footer{margin-top:34px;font-size:12px;color:var(--muted);max-width:80ch}
     <option value="todo">À faire</option>
     <option value="fait">Fait</option>
     <option value="non">Pas pour moi</option>
+    <option value="none">Pas encore trié</option>
   </select>
 </div>
 
@@ -120,7 +138,9 @@ footer{margin-top:34px;font-size:12px;color:var(--muted);max-width:80ch}
 <script>
 (function(){
 'use strict';
-const TABS=[['semaine','Cette semaine'],['saison','C’est la saison'],['classiques','Les classiques'],['astuces','Astuces'],['archives','Semaines passées']];
+const TABS=[['semaine','Cette semaine'],['tourner','À tourner'],['saison','C’est la saison'],['classiques','Les classiques'],['astuces','Astuces'],['archives','Semaines passées']];
+// Calendrier Apple : fichier .ics régénéré depuis les statuts (scripts/calendrier.py), hébergé dans le dépôt public du radar.
+const ICS_URL='https://raw.githubusercontent.com/ilyasbachi-blip/bash/main/radar-recettes/dist/a-tourner.ics';
 const MONTH_FR=['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'];
 
 // ---------- Catalogue saison (référence, dans la page) ----------
@@ -133,23 +153,53 @@ const CLASSIQUES=__CLASSIQUES__;
 // ---------- Astuces (hiver / été) ----------
 const ASTUCES=__ASTUCES__;
 
-const STATUS={todo:'À faire',fait:'Fait',non:'Pas pour moi'};
+const STATUS={'':'Statut…',todo:'À faire',fait:'Fait',non:'Pas pour moi'};
+const PRIO={'1':'Priorité 1 · cette semaine','2':'Priorité 2 · bientôt','3':'Priorité 3 · plus tard'};
+const PRIO_SHORT={'1':'P1 · cette semaine','2':'P2 · bientôt','3':'P3 · plus tard','':'sans priorité'};
+const ASTUCES_LABEL={hiver:'Astuce d’hiver',ete:'Astuce d’été',bases:'Épices et mélanges',frigo:'Bases du frigo'};
 let weeks=__SEMAINES__;        // docs de la collection radar, triés du plus récent au plus ancien
 let current=weeks[0]||null;    // doc affiché
-let statuts={};      // id -> {st}
+let statuts={};      // id -> {st, prio, date, t, o, url, moi}
 let tab='semaine';
 let db=null, canWrite=false;
 const $=s=>document.querySelector(s);
 const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-try{ const t=localStorage.getItem('radar-tab'); if(t) tab=t; }catch(e){}
+try{ const t=localStorage.getItem('radar-tab'); if(t&&TABS.some(x=>x[0]===t)) tab=t; }catch(e){}
 
 function toast(m){ const t=$('#toast'); t.textContent=m; t.classList.add('show'); clearTimeout(toast.h); toast.h=setTimeout(()=>t.classList.remove('show'),1800); }
-function st(id){ return (statuts[id]&&statuts[id].st)||'todo'; }
-function statusSel(id){ const s=st(id); return `<select class="${s}" data-st="${esc(id)}" aria-label="Statut">${Object.keys(STATUS).map(k=>`<option value="${k}" ${k===s?'selected':''}>${STATUS[k]}</option>`).join('')}</select>`; }
-function passFilter(id){ const f=$('#fStatus').value; return !f || st(id)===f; }
-function link(u){ return (u && /^https:\/\//.test(u)) ? `<a href="${esc(u)}" target="_blank" rel="noopener">voir</a>` : ''; }
+function rec(id){ return statuts[id]||{}; }
+function st(id){ return rec(id).st||''; }
+function prio(id){ return String(rec(id).prio||''); }
+function todayISO(){ const d=new Date(); return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
+function fmtDate(iso){ if(!iso||!/^\d{4}-\d{2}-\d{2}$/.test(iso)) return ''; const [y,m,d]=iso.split('-').map(Number); try{ return new Intl.DateTimeFormat('fr-FR',{weekday:'short',day:'numeric',month:'short'}).format(new Date(y,m-1,d)); }catch(e){ return d+'/'+m; } }
 
-function renderTabs(){ $('#tabs').innerHTML=TABS.map(([k,l])=>`<button class="tab" type="button" data-tab="${k}" aria-pressed="${tab===k}">${l}</button>`).join(''); }
+// Retrouve le titre et l'origine d'une ligne à partir de son identifiant (v: viral, f: focus, s: saison, c: classique, a: astuce).
+function meta(id){
+  const p=id.split(':');
+  if(p[0]==='c') return {t:id.slice(2), o:'Classique'};
+  if(p[0]==='s'){ const m=SAISON[p[1]]; const it=m&&m.plats[Number(p[2])]; return {t:it?it[0]:id, o:'Saison · '+(m?m.titre:p[1]), moi:it?it[1]:''}; }
+  if(p[0]==='a'){ const g=ASTUCES[p[1]]; const it=g&&g[Number(p[2])]; return {t:it?it[0]:id, o:ASTUCES_LABEL[p[1]]||'Astuce', moi:it?it[1]:''}; }
+  if(p[0]==='f'){ const w=weeks.find(x=>x.id===p[1]); const it=w&&(w.focus||[])[Number(p[2])]; return {t:it?it.t:id, o:'Focus · '+(w?w.label:p[1]), moi:it?it.d:''}; }
+  if(p[0]==='v'){ const vid=id.slice(2); for(const w of weeks){ const it=(w.viral||[]).find((v,i)=>String(v.id||i)===vid); if(it) return {t:it.t, o:'Viral · '+(it.src||w.label||''), url:it.url||'', moi:it.moi||''}; } return {t:vid, o:'Viral'}; }
+  return {t:id, o:''};
+}
+
+function statusSel(id){ const s=st(id); return `<select class="${s}" data-st="${esc(id)}" aria-label="Statut">${Object.keys(STATUS).map(k=>`<option value="${k}" ${k===s?'selected':''}>${STATUS[k]}</option>`).join('')}</select>`; }
+// Bloc de contrôle complet : statut, puis (si « À faire ») priorité et jour de tournage.
+function ctl(id,extra){
+  const s=st(id), r=rec(id), p=prio(id);
+  let h=`<div class="ctl" data-id="${esc(id)}">${statusSel(id)}`;
+  if(s==='todo'){
+    h+=`<select class="p${p||0}" data-prio="${esc(id)}" aria-label="Priorité"><option value="" ${p?'':'selected'}>Priorité ?</option>${Object.keys(PRIO).map(k=>`<option value="${k}" ${k===p?'selected':''}>${PRIO[k]}</option>`).join('')}</select>`;
+    h+=`<span class="lbl">tourner le</span><input type="date" data-date="${esc(id)}" value="${esc(r.date||'')}" aria-label="Jour de tournage">`;
+  }
+  return h+(extra||'')+`</div>`;
+}
+function passFilter(id){ const f=$('#fStatus').value; if(!f) return true; if(f==='none') return !st(id); return st(id)===f; }
+function link(u){ return (u && /^https:\/\//.test(u)) ? `<a href="${esc(u)}" target="_blank" rel="noopener">voir</a>` : ''; }
+function todos(){ return Object.keys(statuts).filter(id=>statuts[id].st==='todo').map(id=>Object.assign({id},meta(id),statuts[id])); }
+
+function renderTabs(){ const n=todos().length; $('#tabs').innerHTML=TABS.map(([k,l])=>`<button class="tab" type="button" data-tab="${k}" aria-pressed="${tab===k}">${l}${k==='tourner'&&n?` · ${n}`:''}</button>`).join(''); }
 
 function renderWeekHeader(){
   if(!current){ $('#week').textContent='Aucun relevé enregistré pour l’instant. Le premier arrive avec la tâche du lundi.'; return; }
@@ -166,7 +216,7 @@ function viralCard(v,i){
     ${v.tags?`<div class="tags">${v.tags.map(t=>`<span class="tag">${esc(t)}</span>`).join('')}</div>`:''}
     ${v.meca?`<div class="meca"><b>Pourquoi ça marche</b>${esc(v.meca)}</div>`:''}
     ${v.moi?`<div class="moi"><b>Ta version</b>${esc(v.moi)}</div>`:''}
-    <div class="ctl">${statusSel(id)}${link(v.url)}</div>
+    ${ctl(id,link(v.url))}
   </article>`;
 }
 
@@ -179,7 +229,7 @@ function renderSemaine(){
     h+=`<section class="section"><div class="sec-head"><h2>Les formats qui montent</h2><div class="sub">Mécaniques d’ouverture et de structure, indépendantes du plat.</div></div><div class="list">${current.formats.map(f=>`<div class="item"><div class="t">${esc(f.t)}</div><div class="when">${esc(f.src||'')}</div><div class="d">${esc(f.d||'')}</div></div>`).join('')}</div></section>`;
   }
   if(current.focus&&current.focus.length){
-    h+=`<section class="section"><div class="sec-head"><h2>À tourner cette semaine</h2><div class="sub">Le croisement des trois autres rubriques avec ton calendrier.</div></div><div class="list">${current.focus.map((f,i)=>{const id='f:'+(current.id||'')+':'+i; if(!passFilter(id)) return ''; return `<div class="item s-${st(id)}"><div class="t">${esc(f.t)}</div><div class="when">${esc(f.q||'')}</div><div class="d">${esc(f.d||'')}</div><div class="ctl" style="grid-column:1/-1">${statusSel(id)}</div></div>`;}).join('')}</div></section>`;
+    h+=`<section class="section"><div class="sec-head"><h2>À tourner cette semaine</h2><div class="sub">Le croisement des trois autres rubriques avec ton calendrier.</div></div><div class="list">${current.focus.map((f,i)=>{const id='f:'+(current.id||'')+':'+i; if(!passFilter(id)) return ''; return `<div class="item s-${st(id)}"><div class="t">${esc(f.t)}</div><div class="when">${esc(f.q||'')}</div><div class="d">${esc(f.d||'')}</div>${ctl(id)}</div>`;}).join('')}</div></section>`;
   }
   return h;
 }
@@ -189,7 +239,7 @@ function renderSaison(){
   const key=SAISON[String(m)]?String(m):'default';
   const now=SAISON[key];
   const next=SAISON[String(m===12?1:m+1)];
-  let h=`<section class="section"><div class="sec-head"><h2>${esc(now.titre)}</h2><div class="sub">Produits du moment : ${esc(now.produits)}.</div></div><div class="list">${now.plats.map((p,i)=>{const id='s:'+key+':'+i; if(!passFilter(id)) return ''; return `<div class="item s-${st(id)}"><div class="t">${esc(p[0])}</div><div class="when"></div><div class="d">${esc(p[1])}</div><div class="ctl" style="grid-column:1/-1">${statusSel(id)}</div></div>`;}).join('')}</div></section>`;
+  let h=`<section class="section"><div class="sec-head"><h2>${esc(now.titre)}</h2><div class="sub">Produits du moment : ${esc(now.produits)}.</div></div><div class="list">${now.plats.map((p,i)=>{const id='s:'+key+':'+i; if(!passFilter(id)) return ''; return `<div class="item s-${st(id)}"><div class="t">${esc(p[0])}</div><div class="when"></div><div class="d">${esc(p[1])}</div>${ctl(id)}</div>`;}).join('')}</div></section>`;
   if(next&&next.plats.length) h+=`<section class="section"><div class="sec-head"><h2>Le mois d’après : ${esc(next.titre)}</h2><div class="sub">À préparer maintenant (charcuteries à lancer, commandes chez le boucher, produits à trouver). Produits : ${esc(next.produits)}.</div></div><div class="list">${next.plats.map(p=>`<div class="item"><div class="t">${esc(p[0])}</div><div class="when"></div><div class="d">${esc(p[1])}</div></div>`).join('')}</div></section>`;
   h+=`<section class="section"><div class="sec-head"><h2>Les dates qui comptent</h2></div><div class="tablewrap"><table class="dates"><thead><tr><th>Date</th><th>Quoi</th><th>La vidéo</th></tr></thead><tbody>${DATES.map(d=>`<tr><td>${esc(d[0])}</td><td>${esc(d[1])}</td><td>${esc(d[2])}</td></tr>`).join('')}</tbody></table></div></section>`;
   return h;
@@ -197,7 +247,7 @@ function renderSaison(){
 
 function renderClassiques(){
   const libres=CLASSIQUES.filter(c=>c.ok), bloques=CLASSIQUES.filter(c=>!c.ok);
-  const card=(c,i)=>{const id='c:'+c.t; if(!passFilter(id)) return ''; return `<article class="card s-${st(id)}"><div class="row"><h3>${esc(c.t)}</h3><span class="tag ${c.ok?'ok':'no'}">${c.ok?'libre':'bloqué'}</span></div><div class="src">Dernière fois : <b>${esc(c.fait)}</b> · quand : ${esc(c.q)}</div><div class="meca">${esc(c.a)}</div><div class="ctl">${statusSel(id)}</div></article>`;};
+  const card=(c,i)=>{const id='c:'+c.t; if(!passFilter(id)) return ''; return `<article class="card s-${st(id)}"><div class="row"><h3>${esc(c.t)}</h3><span class="tag ${c.ok?'ok':'no'}">${c.ok?'libre':'bloqué'}</span></div><div class="src">Dernière fois : <b>${esc(c.fait)}</b> · quand : ${esc(c.q)}</div><div class="meca">${esc(c.a)}</div>${ctl(id)}</article>`;};
   return `<section class="section"><div class="sec-head"><h2>Les classiques qui restent des bangers</h2><div class="sub">Ce que les gens cherchent toute l’année. « Dernière fois » = ta dernière publication connue ; libre = plus de 24 mois ou jamais fait.</div></div><div class="grid">${libres.map(card).join('')}</div></section>
   <section class="section"><div class="sec-head"><h2>Bloqués pour l’instant</h2><div class="sub">Refaits trop récemment : seulement un autre plat de la même famille, ou le geste et la page du livre.</div></div><div class="grid">${bloques.map(card).join('')}</div></section>`;
 }
@@ -207,7 +257,23 @@ function renderAstuces(){
   const list=ASTUCES[saisonAstuces];
   return `<section class="section"><div class="toggle"><button class="tab" type="button" data-season="hiver" aria-pressed="${saisonAstuces==='hiver'}">Hiver</button><button class="tab" type="button" data-season="ete" aria-pressed="${saisonAstuces==='ete'}">Été</button><button class="tab" type="button" data-season="bases" aria-pressed="${saisonAstuces==='bases'}">Épices et mélanges</button><button class="tab" type="button" data-season="frigo" aria-pressed="${saisonAstuces==='frigo'}">Bases du frigo et du congélateur</button></div>
   <div class="sec-head"><h2>${({bases:'Faire ses propres épices et mélanges',frigo:'Les bases du frigo et du congélateur',hiver:'Astuces et petits trucs d’hiver',ete:'Astuces et petits trucs d’été'})[saisonAstuces]}</h2><div class="sub">${({bases:'Toute l’année. Mécanique de la série Arrête d’acheter : l’étiquette du pot du commerce lue à voix haute (le sel en premier ingrédient), le mélange maison pesé, le pot étiqueté à la fin. Un mélange = une vidéo, et chaque mélange renvoie à une recette déjà publiée.',frigo:'Toute l’année. Ce qu’on prépare une fois pour gagner du temps toute la semaine : un bocal, un bac à glaçons, un torchon. Mécanique : le geste du dimanche, puis le plat de mardi qui va plus vite.',hiver:'Format « le problème, l’astuce, la preuve » : 30 à 60 secondes, très enregistré, à glisser entre deux recettes.',ete:'Format « le problème, l’astuce, la preuve » : 30 à 60 secondes, très enregistré, à glisser entre deux recettes.'})[saisonAstuces]}</div></div>
-  <div class="list">${list.map((a,i)=>{const id='a:'+saisonAstuces+':'+i; if(!passFilter(id)) return ''; return `<div class="item s-${st(id)}"><div class="t">${esc(a[0])}</div><div class="when">${a[2]?`<span class="tag n">${esc(a[2])}</span>`:''}</div><div class="d">${esc(a[1])}</div><div class="ctl" style="grid-column:1/-1">${statusSel(id)}</div></div>`;}).join('')}</div></section>`;
+  <div class="list">${list.map((a,i)=>{const id='a:'+saisonAstuces+':'+i; if(!passFilter(id)) return ''; return `<div class="item s-${st(id)}"><div class="t">${esc(a[0])}</div><div class="when">${a[2]?`<span class="tag n">${esc(a[2])}</span>`:''}</div><div class="d">${esc(a[1])}</div>${ctl(id)}</div>`;}).join('')}</div></section>`;
+}
+
+function renderTourner(){
+  const list=todos(); const today=todayISO();
+  const order=x=>({'1':1,'2':2,'3':3}[String(x.prio||'')]||4);
+  list.sort((a,b)=>order(a)-order(b)||String(a.date||'9999').localeCompare(String(b.date||'9999'))||String(a.t).localeCompare(String(b.t),'fr'));
+  const dated=list.filter(x=>x.date).length, late=list.filter(x=>x.date&&x.date<today).length, nop=list.filter(x=>!x.prio).length;
+  let h=`<section class="section"><div class="sec-head"><h2>${list.length?`${list.length} à tourner`:'Rien à tourner pour l’instant'}</h2><div class="sub">${list.length?`${dated} avec un jour fixé${late?`, <span class="late">${late} en retard</span>`:''}${nop?` · ${nop} sans priorité`:''}. Trié par priorité, puis par date.`:'Choisis « À faire » sur une fiche, puis une priorité et un jour : tout se retrouve ici.'}</div></div>`;
+  if(list.length){
+    const groups=[['1','Cette semaine'],['2','Bientôt'],['3','Plus tard'],['','Sans priorité — choisis-en une']];
+    h+=groups.map(([k,label])=>{ const g=list.filter(x=>String(x.prio||'')===k); if(!g.length) return ''; return `<h3 style="margin:14px 0 8px"><span class="prio p${k||0}">${esc(label)}</span></h3><div class="list">${g.map(x=>`<div class="item s-todo"><div class="t">${esc(x.t)}</div><div class="when">${x.date?`<span class="${x.date<today?'late':''}">${esc(fmtDate(x.date))}</span>`:'<span class="lbl" style="color:var(--muted)">pas de jour</span>'}</div><div class="o">${esc(x.o||'')}</div>${x.moi?`<div class="d">${esc(x.moi)}</div>`:''}${ctl(x.id,link(x.url))}</div>`).join('')}</div>`; }).join('');
+  }
+  h+=`</section><section class="section"><div class="sec-head"><h2>Dans ton calendrier Apple</h2><div class="sub">Les lignes « À faire » qui ont un jour deviennent des événements « journée entière ». Un seul réglage, une fois : s’abonner à l’adresse ci-dessous. Le fichier est régénéré par Claude à partir de tes choix (pas en direct : demande « mets à jour mon calendrier » ou attends la tâche planifiée).</div></div>
+  <div class="cal"><code id="icsUrl">${esc(ICS_URL)}</code><div class="btns"><button type="button" data-copy="${esc(ICS_URL)}">Copier l’adresse</button><button type="button" data-copy="${esc(ICS_URL.replace(/^https:/,'webcal:'))}">Copier en webcal://</button></div>
+  <details><summary>Comment s’abonner</summary><div style="margin-top:6px">iPhone : Réglages → Apps → Calendrier → Comptes → Ajouter un compte → Autre → « Ajouter un cal. avec abonnement », coller l’adresse, puis Suivant et Enregistrer (régler « Mise à jour auto » sur chaque jour ou chaque heure).<br>Mac : Calendrier → Fichier → Nouvel abonnement à un calendrier, coller l’adresse. Choisir iCloud comme emplacement pour le voir aussi sur l’iPhone.</div></details></div></section>`;
+  return h;
 }
 
 function renderArchives(){
@@ -217,20 +283,36 @@ function renderArchives(){
 
 function render(){
   renderTabs(); renderWeekHeader();
-  $('#intro').textContent={semaine:'Ce qui a percé récemment, avec la source et le chiffre, puis ta façon de le faire.',saison:'Ce que le calendrier et les étals demandent maintenant, et le mois d’après pour anticiper.',classiques:'Les plats que tout le monde recherche, croisés avec ce que tu as déjà publié.',astuces:'Les formats courts qui font enregistrer, selon la saison.',archives:'Les relevés précédents.'}[tab];
-  $('#content').innerHTML={semaine:renderSemaine,saison:renderSaison,classiques:renderClassiques,astuces:renderAstuces,archives:renderArchives}[tab]();
+  $('#intro').textContent={semaine:'Ce qui a percé récemment, avec la source et le chiffre, puis ta façon de le faire.',tourner:'Tout ce que tu as coché « À faire », par priorité : ce qu’il y a à tourner, et quand.',saison:'Ce que le calendrier et les étals demandent maintenant, et le mois d’après pour anticiper.',classiques:'Les plats que tout le monde recherche, croisés avec ce que tu as déjà publié.',astuces:'Les formats courts qui font enregistrer, selon la saison.',archives:'Les relevés précédents.'}[tab];
+  $('#content').innerHTML={semaine:renderSemaine,tourner:renderTourner,saison:renderSaison,classiques:renderClassiques,astuces:renderAstuces,archives:renderArchives}[tab]();
+}
+
+async function copyText(txt){
+  try{ await navigator.clipboard.writeText(txt); toast('Copié'); }
+  catch(e){ const el=$('#icsUrl'); if(el){ const r=document.createRange(); r.selectNodeContents(el); const s=getSelection(); s.removeAllRanges(); s.addRange(r); } toast('Sélectionné : copie avec le menu'); }
+}
+
+// Enregistre une ligne : statut + priorité + jour, avec le titre et l'origine pour que le calendrier n'ait rien à résoudre.
+async function saveLine(id){
+  const box=document.querySelector(`.ctl[data-id="${CSS.escape(id)}"]`); if(!box) return;
+  const prev=rec(id), m=meta(id);
+  const stSel=box.querySelector('select[data-st]'), prSel=box.querySelector('select[data-prio]'), dt=box.querySelector('input[data-date]');
+  const r={st:stSel?stSel.value:prev.st||'', prio:prSel?prSel.value:(prev.prio||''), date:dt?dt.value:(prev.date||''), t:m.t||prev.t||id, o:m.o||prev.o||'', url:m.url||prev.url||'', moi:m.moi||prev.moi||''};
+  statuts[id]=r; render();
+  if(r.st==='todo'&&!r.prio) toast('Et la priorité ?');
+  if(db&&canWrite){ try{ await db.collection('statuts').doc(id.replace(/\//g,'_')).set(Object.assign({id,ts:new Date().toISOString()},r)); if(r.prio||r.st!=='todo') toast('Enregistré'); }catch(err){ toast('Pas enregistré : '+(err&&err.code||'erreur')); } }
+  else toast('Gardé sur cette page seulement');
 }
 
 document.addEventListener('click',e=>{
   const t=e.target.closest('[data-tab]'); if(t){ tab=t.dataset.tab; try{localStorage.setItem('radar-tab',tab);}catch(x){} render(); return; }
   const s=e.target.closest('[data-season]'); if(s){ saisonAstuces=s.dataset.season; render(); return; }
-  const w=e.target.closest('[data-week]'); if(w){ current=weeks.find(x=>x.id===w.dataset.week)||current; tab='semaine'; render(); }
+  const w=e.target.closest('[data-week]'); if(w){ current=weeks.find(x=>x.id===w.dataset.week)||current; tab='semaine'; render(); return; }
+  const c=e.target.closest('[data-copy]'); if(c){ copyText(c.dataset.copy); }
 });
-document.addEventListener('change',async e=>{
-  const sel=e.target.closest('select[data-st]');
-  if(sel){ const id=sel.dataset.st, v=sel.value; statuts[id]={st:v}; render();
-    if(db&&canWrite){ try{ await db.collection('statuts').doc(id.replace(/\//g,'_')).set({id,st:v,ts:new Date().toISOString()}); toast('Enregistré'); }catch(err){ toast('Pas enregistré : '+(err&&err.code||'erreur')); } }
-    else toast('Statut gardé sur cette page seulement'); return; }
+document.addEventListener('change',e=>{
+  const box=e.target.closest('.ctl[data-id]');
+  if(box){ saveLine(box.dataset.id); return; }
   if(e.target.id==='fStatus') render();
 });
 
@@ -251,7 +333,7 @@ render();
       if(!current||!weeks.find(w=>w.id===current.id)) current=weeks[0]||null;
       render();
     },err=>{ clearTimeout(timer); console.warn(err); });
-    db.collection('statuts').onSnapshot(snap=>{ (snap.docs||[]).forEach(d=>{ const x=d.data()||{}; if(x.id) statuts[x.id]={st:x.st}; }); render(); },err=>console.warn(err));
+    db.collection('statuts').onSnapshot(snap=>{ (snap.docs||[]).forEach(d=>{ const x=d.data()||{}; if(x.id) statuts[x.id]={st:x.st||'',prio:String(x.prio||''),date:x.date||'',t:x.t||'',o:x.o||'',url:x.url||'',moi:x.moi||''}; }); render(); },err=>console.warn(err));
   }catch(e){ clearTimeout(timer); console.warn(e); }
 })();
 })();
